@@ -14,5 +14,6 @@ namespace LojaRoupas.Context
         public DbSet<Roupa> Roupas { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Marca> Marcas { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
     }
 }

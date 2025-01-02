@@ -1,7 +1,10 @@
-﻿using LojaRoupas.ViewModels;
+﻿using LojaRoupas.Context;
+using LojaRoupas.Models;
+using LojaRoupas.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace LojaRoupas.Controllers
 {
@@ -10,11 +13,13 @@ namespace LojaRoupas.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly AppDbContext _dbContext;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, AppDbContext dbContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _dbContext = dbContext;
         }
 
         [AllowAnonymous]
@@ -63,7 +68,7 @@ namespace LojaRoupas.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(LoginViewModel registroVM)
+        public async Task<IActionResult> Register(LoginViewModel registroVM, Cliente cliente)
         {
             if (!ModelState.IsValid)
             {
@@ -78,10 +83,23 @@ namespace LojaRoupas.Controllers
                     SecurityStamp = Guid.NewGuid().ToString()
                 };
 
+                cliente.Nome = registroVM.Nome;
+                cliente.Email = registroVM.Email;
+                cliente.CPF = registroVM.CPF;  
+                cliente.Celular = registroVM.Celular;
+                cliente.CEP = registroVM.CEP;
+                cliente.Logradouro = registroVM.Logradouro;
+                cliente.Numero = registroVM.Numero;
+                cliente.Bairro = registroVM.Bairro;
+                cliente.Estado = registroVM.Estado;
+                cliente.Cidade = registroVM.Cidade;
+                cliente.DataInclusao = DateTime.UtcNow.AddHours(-3);
+
                 var result = await _userManager.CreateAsync(name, registroVM.Senha);
 
                 if (result.Succeeded)
                 {
+                    _dbContext.Clientes.Add(cliente);
                     await _userManager.AddToRoleAsync(name, "Cliente");
                     return RedirectToAction("Index", "Home");
                 }
