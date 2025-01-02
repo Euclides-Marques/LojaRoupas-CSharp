@@ -1,0 +1,206 @@
+﻿@model LoginViewModel
+
+<style>
+    body {
+        margin: 0;
+        display: flex;
+        align-content: center;
+        justify-items: center;
+        overflow: hidden;
+    }
+
+    .container {
+        padding: 150px;
+    }
+
+    .btn-largo {
+        width: 50%
+    }
+
+    #logoPreta {
+        width: 30%;
+        margin-bottom: 10px;
+        margin: auto;
+        display: block;
+    }
+
+
+    input {
+        margin-bottom: 20px;
+    }
+
+    #texto {
+        font-size: 20px;
+        color: #A07B63;
+    }
+
+    hr {
+        margin-top: 5px;
+    }
+</style>
+
+<divc class="container">
+    <img src="~/images/logoPreta.png" id="logoPreta">
+
+    <br />
+    <br />
+
+    <span id="texto">CADASTRAR-SE</span>
+    <hr />
+
+    <div class="row">
+        <div class="col-12">
+            <form asp-controller="Account" asp-action="Register" method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <input type="text" class="form-control" asp-for="Nome" placeholder="Nome">
+                        <span asp-validation-for="Nome" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <input type="email" class="form-control" asp-for="Email" placeholder="Email">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <input type="text" class="form-control" id="inputCPF" placeholder="CPF">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <input type="text" class="form-control" id="inputCEP" placeholder="CEP">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <input type="text" class="form-control" id="inputCity" placeholder="Cidade">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <input type="text" class="form-control" id="inputBairro" placeholder="Bairro">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <select id="inputEstado" class="form-control">
+                            <option selected>Estado</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-9">
+                        <input type="text" class="form-control" id="inputAddress" placeholder="Endereço">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <input type="number" class="form-control" id="inputNumber" placeholder="Número">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <input type="password" class="form-control" asp-for="Senha" placeholder="Senha">
+                        <span asp-validation-for="Senha" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <input type="password" class="form-control" placeholder="Confirmar Senha">
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-success btn-largo">CADASTRAR</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</divc>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Preenchendo o select de estados
+        const estados = [
+            'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA',
+            'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN',
+            'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'
+        ];
+
+        const selectEstado = document.getElementById("inputEstado");
+
+        estados.forEach(function(estado) {
+            const option = document.createElement("option");
+            option.value = estado;
+            option.textContent = estado;
+            selectEstado.appendChild(option);
+        });
+
+        // Preenchendo os campos de endereço com base no CEP
+        const cepInput = document.getElementById("inputCEP");
+        const cityInput = document.getElementById("inputCity");
+        const stateSelect = document.getElementById("inputEstado");
+        const neighborhoodInput = document.getElementById("inputBairro");
+        const addressInput = document.getElementById("inputAddress");
+
+        function clearFields() {
+            cityInput.value = "";
+            stateSelect.value = "Estado";
+            neighborhoodInput.value = "";
+            addressInput.value = "";
+        }
+
+        function fillFields(data) {
+            if (data && data.erro) {
+                clearFields();
+                alert("CEP não encontrado!");
+                return;
+            }
+            cityInput.value = data.localidade;
+            stateSelect.value = data.uf;
+            neighborhoodInput.value = data.bairro;
+            addressInput.value = data.logradouro;
+        }
+
+        cepInput.addEventListener("blur", function() {
+            const cep = cepInput.value.replace(/\D/g, '');
+
+            if (cep.length === 8) {
+                fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                    .then(response => response.json())
+                    .then(data => fillFields(data))
+                    .catch(() => {
+                        clearFields();
+                        alert("Erro ao buscar CEP.");
+                    });
+            } else {
+                clearFields();
+            }
+        });
+
+        // Formatando CPF e CEP
+        const cpfInput = document.getElementById("inputCPF");
+
+        cepInput.addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            if (value.length > 5) {
+                value = value.slice(0, 5) + '-' + value.slice(5, 8);
+            }
+
+            this.value = value;
+        });
+
+        cpfInput.addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            if (value.length > 9) {
+                value = value.slice(0, 3) + '.' + value.slice(3, 6) + '.' + value.slice(6, 9) + '-' + value.slice(9, 11);
+            } else if (value.length > 6) {
+                value = value.slice(0, 3) + '.' + value.slice(3, 6) + '.' + value.slice(6, 9);
+            } else if (value.length > 3) {
+                value = value.slice(0, 3) + '.' + value.slice(3, 6);
+            }
+
+            this.value = value;
+        });
+    });
+</script>

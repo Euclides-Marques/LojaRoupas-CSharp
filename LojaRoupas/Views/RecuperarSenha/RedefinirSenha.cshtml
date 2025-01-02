@@ -1,0 +1,69 @@
+﻿@model LojaRoupas.Controllers.RedefinirSenhaModel
+
+@{
+    ViewData["Title"] = "Redefinir Senha";
+}
+
+<style>
+    body {
+        background: linear-gradient(to right, #808080, #A9A9A9);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        padding: 20px;
+        transform: translate(-50%, -50%);
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        margin-bottom: 15px;
+    }
+
+    .btn{
+        width: 100%;
+    }
+</style>
+
+<div class="card">
+    <h1 class="text-center">@ViewData["Title"]</h1>
+    <br />
+    <form asp-action="RedefinirSenha" method="post">
+        <input type="hidden" asp-for="Token" />
+
+        <!-- E-mail -->
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" class="form-control" id="email" name="Email" value="@Model.Email" readonly />
+        </div>
+
+        <!-- Nova Senha -->
+        <div class="form-group">
+            <label for="senha">Nova Senha</label>
+            <input type="password" class="form-control" id="senha" name="Senha" required />
+        </div>
+
+        <!-- Confirmar Nova Senha -->
+        <div class="form-group">
+            <label for="confirmacaoSenha">Confirmar Nova Senha</label>
+            <input type="password" class="form-control" id="confirmacaoSenha" name="ConfirmacaoSenha" required />
+        </div>
+
+        <button type="submit" class="btn btn-success btn-block">Redefinir Senha</button>
+    </form>
+</div>

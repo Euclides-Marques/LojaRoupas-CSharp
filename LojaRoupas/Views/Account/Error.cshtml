@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Login Inválido";
+}
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        background: linear-gradient(to right, #808080, #A9A9A9);
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+
+    .card-body {
+        padding: 20px;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 16px;
+        color: #555;
+    }
+</style>
+
+<div class="card">
+    <div class="card-body text-center">
+        <h1>@ViewData["Title"]</h1>
+        <br />
+        <p>O login informado é inválido. Por favor, tente novamente.</p>
+        <br />
+        <a href="@Url.Action("Index", "Home")" class="btn btn-danger">Voltar ao login</a>
+    </div>
+</div>
