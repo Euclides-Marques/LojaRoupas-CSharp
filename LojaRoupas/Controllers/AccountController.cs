@@ -11,11 +11,11 @@ namespace LojaRoupas.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly AppDbContext _dbContext;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, AppDbContext dbContext)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, AppDbContext dbContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -72,17 +72,6 @@ namespace LojaRoupas.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var name = new IdentityUser
-                {
-                    UserName = registroVM.Nome.ToLower(),
-                    NormalizedUserName = registroVM.Nome.ToUpper(),
-                    Email = registroVM.Email.ToLower(),
-                    NormalizedEmail = registroVM.Email.ToUpper(),
-                    EmailConfirmed = true,
-                    LockoutEnabled = true,
-                    SecurityStamp = Guid.NewGuid().ToString()
-                };
-
                 cliente.Nome = registroVM.Nome;
                 cliente.Email = registroVM.Email;
                 cliente.CPF = registroVM.CPF;  
@@ -95,11 +84,25 @@ namespace LojaRoupas.Controllers
                 cliente.Cidade = registroVM.Cidade;
                 cliente.DataInclusao = DateTime.UtcNow.AddHours(-3);
 
+                _dbContext.Clientes.Add(cliente);
+                await _dbContext.SaveChangesAsync();
+
+                var name = new ApplicationUser
+                {
+                    UserName = registroVM.Nome.ToLower(),
+                    NormalizedUserName = registroVM.Nome.ToUpper(),
+                    Email = registroVM.Email.ToLower(),
+                    NormalizedEmail = registroVM.Email.ToUpper(),
+                    EmailConfirmed = true,
+                    LockoutEnabled = true,
+                    SecurityStamp = Guid.NewGuid().ToString(),
+                    ClienteId = cliente.Id
+                };
+
                 var result = await _userManager.CreateAsync(name, registroVM.Senha);
 
                 if (result.Succeeded)
                 {
-                    _dbContext.Clientes.Add(cliente);
                     await _userManager.AddToRoleAsync(name, "Cliente");
                     return RedirectToAction("Index", "Home");
                 }

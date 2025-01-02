@@ -1,14 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using LojaRoupas.Models;
+using Microsoft.AspNetCore.Identity;
 using System.Data;
 
 namespace LojaRoupas.Services
 {
     public class SeedUserRoleInitial : ISeedUserRoleInitial
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public SeedUserRoleInitial(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public SeedUserRoleInitial(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -36,7 +37,7 @@ namespace LojaRoupas.Services
         {
             if (_userManager.FindByEmailAsync("admin@admin").Result == null)
             {
-                IdentityUser user = new IdentityUser();
+                ApplicationUser user = new ApplicationUser();
                 user.UserName = "Admin";
                 user.Email = "admin@admin";
                 user.NormalizedUserName = "ADMIN";

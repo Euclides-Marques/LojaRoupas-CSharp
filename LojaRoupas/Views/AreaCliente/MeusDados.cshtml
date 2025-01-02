@@ -1,4 +1,6 @@
-﻿<style>
+﻿@model LojaRoupas.Models.Cliente
+
+<style>
     body {
         margin: 0;
         display: flex;
@@ -50,28 +52,28 @@
 
     <div class="row">
         <div class="col-12">
-            <form asp-controller="AreCliente" asp-action="DadosCliente" method="get">
+            <form asp-controller="AreaCliente" asp-action="Salvar" method="post">
                 <div asp-validation-summary="All" class="text-danger"></div>
 
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="inputNome">Nome</label>
-                        <input type="text" class="form-control" id="inputNome" placeholder="Nome">
+                        <input type="text" class="form-control" id="inputNome" placeholder="Nome" value="@Model.Nome">
                     </div>
 
                     <div class="form-group col-md-6">
                         <label for="inputCPF">CPF</label>
-                        <input type="text" class="form-control" id="inputCPF" placeholder="CPF">
+                        <input type="text" class="form-control" id="inputCPF" placeholder="CPF" value="@Model.CPF">
                     </div>
 
                     <div class="form-group col-md-6">
                         <label for="inputEmail">Email</label>
-                        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                        <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="@Model.Email">
                     </div>
 
                     <div class="form-group col-md-6">
                         <label for="inputCELULAR">Celular</label>
-                        <input type="tel" class="form-control" id="inputCELULAR" placeholder="Celular">
+                        <input type="tel" class="form-control" id="inputCELULAR" placeholder="Celular" value="@Model.Celular">
                     </div>
                 </div>
 
@@ -81,34 +83,34 @@
                 <div class="row">
                     <div class="form-group col-md-3">
                         <label for="inputCEP">CEP</label>
-                        <input type="text" class="form-control" id="inputCEP" placeholder="CEP">
+                        <input type="text" class="form-control" id="inputCEP" placeholder="CEP" value="@Model.CEP">
                     </div>
 
                     <div class="form-group col-md-6">
                         <label for="inputAddress">Logradouro</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="Logradouro">
+                        <input type="text" class="form-control" id="inputAddress" placeholder="Logradouro" value="@Model.Logradouro">
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="inputNumber">Número</label>
-                        <input type="number" class="form-control" id="inputNumber" placeholder="Número">
+                        <input type="number" class="form-control" id="inputNumber" placeholder="Número" value="@Model.Numero">
                     </div>
 
                     <div class="form-group col-md-4">
                         <label for="inputBairro">Bairro</label>
-                        <input type="text" class="form-control" id="inputBairro" placeholder="Bairro">
+                        <input type="text" class="form-control" id="inputBairro" placeholder="Bairro" value="@Model.Bairro">
                     </div>
 
                     <div class="form-group col-md-4">
                         <label for="inputEstado">Estado</label>
-                        <select id="inputEstado" class="form-control">
+                        <select id="inputEstado" class="form-control" value="@Model.Estado">
                             <option selected>Estado</option>
                         </select>
                     </div>
 
                     <div class="form-group col-md-4">
                         <label for="inputCity">Cidade</label>
-                        <input type="text" class="form-control" id="inputCity"  placeholder="Cidade">
+                        <input type="text" class="form-control" id="inputCity" placeholder="Cidade" value="@Model.Cidade">
                     </div>
                 </div>
 
@@ -209,7 +211,7 @@
         });
     });
 
-        document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function () {
         const celularInput = document.getElementById("inputCELULAR");
 
         celularInput.addEventListener("input", function () {
@@ -226,5 +228,4 @@
             this.value = value;
         });
     });
-
 </script>

@@ -88,12 +88,17 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-md-9">
+
+                    <div class="form-group col-md-7">
                         <input type="text" class="form-control" id="inputAddress" asp-for="Logradouro" placeholder="Endereço">
                     </div>
 
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-2">
                         <input type="number" class="form-control" id="inputNumber" asp-for="Numero" placeholder="Número">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <input type="text" class="form-control" id="inputCELULAR" asp-for="Celular" placeholder="Celular">
                     </div>
                 </div>
 
@@ -200,6 +205,24 @@
                 value = value.slice(0, 3) + '.' + value.slice(3, 6);
             }
 
+            this.value = value;
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const celularInput = document.getElementById("inputCELULAR");
+
+        celularInput.addEventListener("input", function () {
+            let value = this.value.replace(/\D/g, '');
+            if (value.length > 10) {
+                value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7, 11)}`;
+            } else if (value.length > 6) {
+                value = `(${value.slice(0, 2)}) ${value.slice(2, 6)}-${value.slice(6, 10)}`;
+            } else if (value.length > 2) {
+                value = `(${value.slice(0, 2)}) ${value.slice(2, 6)}`;
+            } else if (value.length > 0) {
+                value = `(${value}`;
+            }
             this.value = value;
         });
     });

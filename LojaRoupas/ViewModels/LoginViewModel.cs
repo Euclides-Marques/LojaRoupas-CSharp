@@ -19,7 +19,7 @@ namespace LojaRoupas.ViewModels
         public string ReturnUrl { get; set; }
 
         public string CPF { get; set; }
-        public string? Celular { get; set; }
+        public string Celular { get; set; }
         public string CEP { get; set; }
         public string Logradouro { get; set; }
         public int Numero { get; set; }

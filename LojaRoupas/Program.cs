@@ -1,5 +1,6 @@
 using LojaRoupas.Context;
 using LojaRoupas.Entities;
+using LojaRoupas.Models;
 using LojaRoupas.Repositories;
 using LojaRoupas.Repositories.Interfaces;
 using LojaRoupas.Services;
@@ -18,7 +19,7 @@ builder.Services.Configure<EmailConfiguration>(builder.Configuration.GetSection(
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
