@@ -1,4 +1,5 @@
-﻿using LojaRoupas.Services;
+﻿using LojaRoupas.Models;
+using LojaRoupas.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
@@ -8,10 +9,10 @@ namespace LojaRoupas.Controllers
 {
     public class RecuperarSenhaController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
 
-        public RecuperarSenhaController(UserManager<IdentityUser> userManager, IEmailSender emailSender)
+        public RecuperarSenhaController(UserManager<ApplicationUser> userManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;

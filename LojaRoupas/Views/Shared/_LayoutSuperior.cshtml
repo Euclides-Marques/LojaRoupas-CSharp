@@ -1,4 +1,8 @@
-﻿@{
+﻿@inject LojaRoupas.Context.AppDbContext _context
+
+@{
+    var categorias = _context.Categorias.ToList();
+
     ViewData["Title"] = "::LOJA ROUPA";
 }
 
@@ -181,9 +185,10 @@
                         Categorias
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">1</a></li>
-                        <li><a class="dropdown-item" href="#">2</a></li>
-                        <li><a class="dropdown-item" href="#">3</a></li>
+                        @foreach (var cat in categorias)
+                        {
+                            <li><a class="dropdown-item" href="#">@cat.Nome</a></li>
+                        }
                     </ul>
                 </li>
                 <li class="nav-item">
