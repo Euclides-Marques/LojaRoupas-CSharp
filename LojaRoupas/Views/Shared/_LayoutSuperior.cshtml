@@ -1,7 +1,7 @@
 ﻿@inject LojaRoupas.Context.AppDbContext _context
 
 @{
-    var categorias = _context.Categorias.ToList();
+    var categorias = _context.Categorias.Where(c => c.Ativo == true).ToList();
 
     ViewData["Title"] = "::LOJA ROUPA";
 }
