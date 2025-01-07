@@ -1,3 +1,105 @@
-﻿<div>
-    <partial name="_LayoutSuperiorAdmin" />
+﻿@{
+    ViewData["Title"] = "::LOJA ROUPA";
+}
+
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+</head>
+
+<style>
+    #sair, #minhaConta, #home {
+        color: #fff;
+        margin-right: 20px;
+    }
+
+        #sair:hover {
+            color: #c0c0c0;
+        }
+
+    a {
+        text-decoration: none;
+    }
+
+    .container {
+        margin-top: 90px;
+    }
+
+    .card {
+        margin-top: 90px;
+        width: 20rem;
+        border: 1px solid #ccc;
+        background: #e0e0e0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    .card-text {
+        margin: 15px;
+        text-align: justify;
+    }
+</style>
+
+<nav class="navbar fixed-top navbar-dark bg-dark">
+    <div class="ms-auto d-flex align-items-center gap-3">
+        <a asp-controller="Main" asp-action="Index">
+            <span id="home">
+                <i class="fas fa-home"></i>
+                Home
+            </span>
+        </a>
+        <a asp-controller="AreaCliente" asp-action="MeusDados">
+            <span id="minhaConta">
+                <i class="fas fa-user"></i>
+                Minha conta
+            </span>
+        </a>
+        <a asp-controller="Home" asp-action="Index">
+            <span id="sair">
+                <i class="fas fa-sign-out-alt fa-rotate-180"></i>
+                Sair
+            </span>
+        </a>
+    </div>
+</nav>
+
+<div class="container text-center mt-5">
+    <img class="img-fluid" src="~/images/LogoPretaAdmin.png" alt="Logo" />
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-12 col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">Categorias</h5>
+                <p class="card-text">Gerencie as categorias de produtos em sua loja, criando e organizando novas opções facilmente.</p>
+                <div class="d-flex justify-content-center">
+                    <a asp-area="Admin" asp-controller="Admin" asp-action="GetCategorias">Visualizar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">Marca</h5>
+                <p class="card-text">Cadastre e gerencie as marcas de produtos para melhorar a organização da sua loja.</p>
+                <div class="d-flex justify-content-center">
+                    <a class="btn btn-primary">Visualizar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">Roupas</h5>
+                <p class="card-text">Cadastre e gerencie as roupas que estão disponíveis em sua loja para facilitar a organização e vendas.</p>
+                <div class="d-flex justify-content-center">
+                    <a class="btn btn-primary">Visualizar</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
