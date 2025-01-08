@@ -3,6 +3,8 @@
 @{
     var categorias = _context.Categorias.Where(c => c.Ativo == true).ToList();
 
+    var marcas = _context.Marcas.Where(marcas => marcas.Ativo == true).ToList();
+
     ViewData["Title"] = "::LOJA ROUPA";
 }
 
@@ -191,6 +193,17 @@
                         }
                     </ul>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Marcas
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        @foreach (var marca in marcas)
+                        {
+                            <li><a class="dropdown-item" href="#">@marca.Nome</a></li>
+                        }
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Lançamentos</a>
                 </li>
@@ -198,13 +211,7 @@
                     <a class="nav-link" href="#">Promoções</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Fique por dentro</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="#">Contato</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Imagens</a>
                 </li>
             </ul>
         </div>
