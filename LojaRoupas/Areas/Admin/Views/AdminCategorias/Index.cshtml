@@ -36,11 +36,16 @@
     #nome{
         padding-top: 15px;
     }
+
+    #btnVoltar{
+        margin-left: 80%;
+    }
 </style>
 
 <div class="container my-4">
     <h1>CATEGORIAS</h1>
     <a asp-action="Create" class="btn btn-success mb-3">Criar Categoria</a>
+    <a asp-area="Admin" asp-controller="Admin" asp-action="Index" id="btnVoltar" class="btn btn-secondary mb-3">Voltar</a>
 
     <table class="table table-striped table-bordered">
         <thead class="table-dark">
@@ -55,7 +60,7 @@
                 <tr>
                     <td id="nome">@Html.DisplayFor(modelItem => cat.Nome)</td>
                     <td class="crud-actions">
-                        <a asp-action="Edit" asp-route-id="@cat.Id" class="btn btn-warning btn-custom">Editar</a>
+                        <a asp-action="Editar" asp-route-id="@cat.Id" class="btn btn-warning btn-custom">Editar</a>
                         <a asp-action="Detalhes" asp-route-id="@cat.Id" class="btn btn-info btn-custom">Detalhes</a>
                         <a asp-action="Deletar" asp-route-id="@cat.Id" class="btn btn-danger btn-custom">Deletar</a>
                     </td>
