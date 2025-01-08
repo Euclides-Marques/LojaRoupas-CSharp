@@ -8,18 +8,18 @@ namespace LojaRoupas.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
-    public class AdminCategoriasController : Controller
+    public class AdminMarcasController : Controller
     {
         private readonly AppDbContext _context;
 
-        public AdminCategoriasController(AppDbContext context)
+        public AdminMarcasController(AppDbContext context)
         {
             _context = context;
         }
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Categorias.ToListAsync());
+            return View(await _context.Marcas.ToListAsync());
         }
 
         [HttpGet]
@@ -30,33 +30,34 @@ namespace LojaRoupas.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id, Nome, DataDeCadastro, Ativo")] Categoria categoria)
+        public async Task<IActionResult> Create([Bind("Id, Nome, DataDeCadastro, Ativo")] Marca marca)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(categoria);
+                _context.Add(marca);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(categoria);
+            return View(marca);
         }
 
         [HttpGet]
-        public  async Task<IActionResult> Detalhes(Guid? id)
+        public async Task<IActionResult> Detalhes(Guid id)
         {
             if(id == null)
             {
                 return NotFound();
             }
 
-            var categoria = await _context.Categorias.FirstOrDefaultAsync(c => c.Id == id);
+            var marca = await _context.Marcas.FirstOrDefaultAsync(m => m.Id == id);
 
-            if(categoria == null)
+            if(marca == null)
             {
                 return NotFound();
             }
-            return View(categoria);
+
+            return View(marca);
         }
 
         [HttpGet]
@@ -67,22 +68,22 @@ namespace LojaRoupas.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var categoria = await _context.Categorias.FirstOrDefaultAsync(c => c.Id == id);
+            var marca = await _context.Marcas.FirstOrDefaultAsync(m => m.Id == id);
 
-            if(categoria == null)
+            if(marca == null)
             {
                 return NotFound();
             }
 
-            return View(categoria);
+            return View(marca);
         }
 
         [HttpPost, ActionName("Deletar")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeletarConfirmar(Guid id)
         {
-            var categoria = await _context.Categorias.FindAsync(id);
-            _context.Categorias.Remove(categoria);
+            var marca = await _context.Marcas.FindAsync(id);
+            _context.Marcas.Remove(marca);
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
@@ -96,21 +97,21 @@ namespace LojaRoupas.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var categorias = await _context.Categorias.FindAsync(id);
+            var marca = await _context.Marcas.FindAsync(id);
 
-            if(categorias == null)
+            if( marca == null)
             {
                 return NotFound();
             }
 
-            return View(categorias);
+            return View(marca);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Editar(Guid id, [Bind("Id, Nome, DataDeCadastro, Ativo")] Categoria categoria)
+        public async Task<IActionResult> Editar(Guid id, [Bind("Id, Nome, DataDeCadastro, Ativo")] Marca marca)
         {
-            if(id != categoria.Id)
+            if (id != marca.Id)
             {
                 return NotFound();
             }
@@ -119,12 +120,13 @@ namespace LojaRoupas.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(categoria);
+                    _context.Update(marca);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoriaExist(categoria.Id)){
+                    if(!MarcaExist(marca.Id))
+                    {
                         return NotFound();
                     }
                     else
@@ -132,16 +134,14 @@ namespace LojaRoupas.Areas.Admin.Controllers
                         throw;
                     }
                 }
-
-                return RedirectToAction(nameof(Index));
             }
 
-            return View(categoria);
+            return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoriaExist(Guid id)
+        private bool MarcaExist(Guid id)
         {
-            return _context.Categorias.Any(c => c.Id == id);
+            return _context.Marcas.Any(m => m.Id == id);
         }
     }
 }
