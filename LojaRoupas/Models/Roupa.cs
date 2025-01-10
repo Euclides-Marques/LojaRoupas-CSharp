@@ -12,7 +12,7 @@ namespace LojaRoupas.Models
         public decimal Preco { get; set; }
         public int Estoque { get; set; }
         public string Descricao { get; set; }
-        public string ImagemUrl { get; set; }
+        public string? ImagemUrl { get; set; }
         public string Genero { get; set; }
         public DateTime DataDeCadastro { get; set; }
         public bool Ativo { get; set; }

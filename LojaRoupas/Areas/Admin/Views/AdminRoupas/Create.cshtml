@@ -1,0 +1,172 @@
+﻿@model LojaRoupas.Models.Roupa
+
+@{
+    ViewData["Title"] = "::LOJA ROUPA";
+}
+
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+</head>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .row {
+        display: flex;
+        gap: 1rem;
+    }
+
+        .row .col {
+            flex: 1;
+        }
+
+    .btn-group {
+        width: 100%;
+    }
+
+        .btn-group .btn {
+            flex: 1;
+        }
+</style>
+
+<h1 class="text-center mb-4">CRIAR ROUPA</h1>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <form asp-action="Create" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="row form-group">
+                        <div class="col">
+                            <label asp-for="Nome" class="control-label">Nome</label>
+                            <input asp-for="Nome" class="form-control" />
+                            <span asp-validation-for="Nome" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label asp-for="Tamanho" class="control-label">Tamanho</label>
+                            <input asp-for="Tamanho" class="form-control" />
+                            <span asp-validation-for="Tamanho" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col">
+                            <label asp-for="Cor" class="control-label">Cor</label>
+                            <input asp-for="Cor" class="form-control" />
+                            <span asp-validation-for="Cor" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label asp-for="Material" class="control-label">Material</label>
+                            <input asp-for="Material" class="form-control" />
+                            <span asp-validation-for="Material" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col">
+                            <label asp-for="Preco" class="control-label">Preço</label>
+                            <input asp-for="Preco" class="form-control" />
+                            <span asp-validation-for="Preco" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label asp-for="Estoque" class="control-label">Estoque</label>
+                            <input asp-for="Estoque" class="form-control" />
+                            <span asp-validation-for="Estoque" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col">
+                            <label asp-for="Descricao" class="control-label">Descrição</label>
+                            <input asp-for="Descricao" class="form-control" />
+                            <span asp-validation-for="Descricao" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label asp-for="ImagemUrl" class="control-label">Imagem</label>
+                            <input type="file" class="form-control" name="imagem" />
+                            <span asp-validation-for="ImagemUrl" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col">
+                            <label class="control-label">Gênero</label>
+                            <div class="form-check">
+                                <input type="checkbox" name="Genero" value="F" class="form-check-input" id="generoF" />
+                                <label class="form-check-label" for="generoF">Feminino</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" name="Genero" value="M" class="form-check-input" id="generoM" />
+                                <label class="form-check-label" for="generoM">Masculino</label>
+                            </div>
+                            <span asp-validation-for="Genero" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label asp-for="DataDeCadastro" class="control-label">Data de Cadastro</label>
+                            <input asp-for="DataDeCadastro" class="form-control" type="date" />
+                            <span asp-validation-for="DataDeCadastro" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col">
+                            <label asp-for="CategoriaId" class="control-label">Categoria</label>
+                            <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId">
+                                <option value="">Selecione uma Categoria</option>
+                            </select>
+                            <span asp-validation-for="CategoriaId" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label asp-for="MarcaId" class="control-label">Marca</label>
+                            <select asp-for="MarcaId" class="form-control" asp-items="ViewBag.MarcaId">
+                                <option value="">Selecione uma Marca</option>
+                            </select>
+                            <span asp-validation-for="MarcaId" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group form-check">
+                        <label class="form-check-label" for="Ativo">Ativo</label>
+                        <input asp-for="Ativo" class="form-check-input" type="checkbox" />
+                        <span asp-validation-for="Ativo" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-3 btn-group d-flex">
+                        <input type="submit" value="Criar Roupa" class="btn btn-success" />
+                        <a asp-action="Index" class="btn btn-secondary">Retornar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
