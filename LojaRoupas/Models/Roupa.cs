@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LojaRoupas.Models
 {
@@ -14,6 +15,8 @@ namespace LojaRoupas.Models
         public string Descricao { get; set; }
         public string? ImagemUrl { get; set; }
         public string Genero { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataDeCadastro { get; set; }
         public bool Ativo { get; set; }
 

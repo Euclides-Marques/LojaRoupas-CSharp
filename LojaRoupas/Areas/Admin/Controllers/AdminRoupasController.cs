@@ -90,5 +90,23 @@ namespace LojaRoupas.Areas.Admin.Controllers
             ViewBag.MarcaId = new SelectList(_context.Marcas, "Id", "Nome", roupa.MarcaId);
             return View(roupa);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Detalhes(Guid id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            var roupa = await _context.Roupas.Include(c => c.Categoria).Include(m => m.Marca).FirstOrDefaultAsync(r => r.Id == id);
+
+            if(roupa == null)
+            {
+                return NotFound();
+            }
+
+            return View(roupa);
+        }
     }
 }

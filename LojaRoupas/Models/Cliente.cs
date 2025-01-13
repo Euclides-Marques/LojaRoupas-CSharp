@@ -1,4 +1,6 @@
-﻿namespace LojaRoupas.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace LojaRoupas.Models
 {
     public class Cliente
     {
@@ -13,6 +15,8 @@
         public string Bairro { get; set; }
         public string Estado { get; set; }
         public string Cidade { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataInclusao { get; set; }
     }
 }

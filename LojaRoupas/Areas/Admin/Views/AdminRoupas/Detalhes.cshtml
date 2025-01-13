@@ -1,0 +1,88 @@
+﻿@model LojaRoupas.Models.Roupa
+
+@{
+    ViewData["Title"] = "::LOJA ROUPA";
+}
+
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+</head>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 800px;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .row {
+        display: flex;
+        gap: 1rem;
+    }
+
+        .row .col {
+            flex: 1;
+        }
+
+    .btn-group {
+        width: 100%;
+    }
+
+        .btn-group .btn {
+            flex: 1;
+        }
+</style>
+
+<h1 class="text-center mb-4">DETALHES DA ROUPA</h1>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <p><strong>Nome:</strong> @Html.DisplayFor(model => model.Nome)</p>
+                        <p><strong>Tamanho:</strong> @Html.DisplayFor(model => model.Tamanho)</p>
+                        <p><strong>Cor:</strong> @Html.DisplayFor(model => model.Cor)</p>
+                        <p><strong>Material:</strong> @Html.DisplayFor(model => model.Material)</p>
+                        <p><strong>Preço:</strong> @Html.DisplayFor(model => model.Preco)</p>
+                        <p><strong>Em Estoque:</strong> @Html.DisplayFor(model => model.Estoque)</p>
+                    </div>
+                    <div class="col">
+                        <p><strong>Descrição:</strong> @Html.DisplayFor(model => model.Descricao)</p>
+                        <p><strong>Gênero:</strong> @Html.DisplayFor(model => model.Genero)</p>
+                        <p><strong>Data de Cadastro:</strong> @Html.DisplayFor(model => model.DataDeCadastro)</p>
+                        <p><strong>Categoria:</strong> @Html.DisplayFor(model => model.Categoria.Nome)</p>
+                        <p><strong>Marca:</strong> @Html.DisplayFor(model => model.Marca.Nome)</p>
+                        <p><strong>Ativo:</strong> @(Model.Ativo ? "Sim" : "Não")</p>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3 btn-group d-flex">
+                    <a asp-action="Editar" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+                    <a asp-action="Index" class="btn btn-secondary">Retornar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
