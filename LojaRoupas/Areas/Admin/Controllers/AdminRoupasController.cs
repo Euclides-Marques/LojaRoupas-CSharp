@@ -62,10 +62,7 @@ namespace LojaRoupas.Areas.Admin.Controllers
                         Directory.CreateDirectory(pastaImagens);
                     }
 
-                    var nomeArquivo = Path.GetFileName(imagem.FileName);
-
-                    nomeArquivo = nomeArquivo.Replace(" ", "_").ToLower(); 
-
+                    var nomeArquivo = Path.GetFileName(imagem.FileName).Replace(" ", "_").ToLower();
                     var caminho = Path.Combine(pastaImagens, nomeArquivo);
 
                     using (var stream = new FileStream(caminho, FileMode.Create))
@@ -73,11 +70,11 @@ namespace LojaRoupas.Areas.Admin.Controllers
                         await imagem.CopyToAsync(stream);
                     }
 
-                    roupa.ImagemUrl = "~/images/roupas/" + nomeArquivo;
+                    roupa.ImagemUrl = "/images/roupas/" + nomeArquivo;
                 }
                 else
                 {
-                    roupa.ImagemUrl = "~/images/roupas/produto-sem-imagem.png";
+                    roupa.ImagemUrl = "/images/roupas/produto-sem-imagem.png";
                 }
 
                 _context.Add(roupa);
@@ -90,6 +87,7 @@ namespace LojaRoupas.Areas.Admin.Controllers
             ViewBag.MarcaId = new SelectList(_context.Marcas, "Id", "Nome", roupa.MarcaId);
             return View(roupa);
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Detalhes(Guid id)
@@ -108,5 +106,60 @@ namespace LojaRoupas.Areas.Admin.Controllers
 
             return View(roupa);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Deletar(Guid id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            var roupa = await _context.Roupas.Include(c => c.Categoria).Include(m => m.Marca).FirstOrDefaultAsync(r => r.Id == id);
+
+            if(roupa == null)
+            {
+                return NotFound();
+            }
+
+            return View(roupa);
+        }
+
+        [HttpPost, ActionName("Deletar")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeletarConfirmar(Guid id)
+        {
+            var roupa = await _context.Roupas.FindAsync(id);
+            _context.Roupas.Remove(roupa);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Editar(Guid id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            var roupa = _context.Roupas.FindAsync(id);
+
+            if(roupa == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.CategoriaId = new SelectList(_context.Categorias, "Id", "Nome");
+            ViewBag.MarcaId = new SelectList(_context.Marcas, "Id", "Nome");
+            return View(roupa);
+        }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Editar([Bind("Id,Nome,Tamanho,Cor,Material,Preco,Estoque,Descricao,Genero,DataDeCadastro,CategoriaId,MarcaId,Ativo")] Roupa roupa, IFormFile imagem)
+        //{
+        //    if
+        //}
     }
 }
