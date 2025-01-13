@@ -143,7 +143,7 @@ namespace LojaRoupas.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var roupa = _context.Roupas.FindAsync(id);
+            var roupa = await _context.Roupas.FindAsync(id);
 
             if(roupa == null)
             {
@@ -155,11 +155,65 @@ namespace LojaRoupas.Areas.Admin.Controllers
             return View(roupa);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Editar([Bind("Id,Nome,Tamanho,Cor,Material,Preco,Estoque,Descricao,Genero,DataDeCadastro,CategoriaId,MarcaId,Ativo")] Roupa roupa, IFormFile imagem)
-        //{
-        //    if
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Editar(Guid id, [Bind("Id,Nome,Tamanho,Cor,Material,Preco,Estoque,Descricao,Genero,DataDeCadastro,CategoriaId,MarcaId,Ativo,ImagemUrl")] Roupa roupa, IFormFile imagem)
+        {
+            if (id != roupa.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (imagem != null && imagem.Length > 0)
+                    {
+                        var pastaImagens = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "roupas");
+
+                        if (!Directory.Exists(pastaImagens))
+                        {
+                            Directory.CreateDirectory(pastaImagens);
+                        }
+
+                        var nomeArquivo = Path.GetFileName(imagem.FileName).Replace(" ", "_").ToLower();
+                        var caminho = Path.Combine(pastaImagens, nomeArquivo);
+
+                        using (var stream = new FileStream(caminho, FileMode.Create))
+                        {
+                            await imagem.CopyToAsync(stream);
+                        }
+
+                        roupa.ImagemUrl = "/images/roupas/" + nomeArquivo;
+                    }
+
+                    _context.Update(roupa);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!RoupaExist(roupa.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+
+            ViewBag.CategoriaId = new SelectList(_context.Categorias, "Id", "Nome", roupa.CategoriaId);
+            ViewBag.MarcaId = new SelectList(_context.Marcas, "Id", "Nome", roupa.MarcaId);
+            return View(roupa);
+        }
+
+
+        private bool RoupaExist(Guid id)
+        {
+            return _context.Roupas.Any(r => r.Id == id);
+        }
     }
 }

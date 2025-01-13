@@ -80,7 +80,7 @@
                     </div>
                     <div class="col">
                         <p><strong>Descrição:</strong> @Html.DisplayFor(model => model.Descricao)</p>
-                        <p><strong>Gênero:</strong> @Html.DisplayFor(model => model.Genero)</p>
+                        <p><strong>Gênero:</strong> @(Model.Genero == "F;M" ? "Unissex" : (Model.Genero == "F" ? "Feminino" : "Masculino"))</p>
                         <p><strong>Data de Cadastro:</strong> @Html.DisplayFor(model => model.DataDeCadastro)</p>
                         <p><strong>Categoria:</strong> @Html.DisplayFor(model => model.Categoria.Nome)</p>
                         <p><strong>Marca:</strong> @Html.DisplayFor(model => model.Marca.Nome)</p>
