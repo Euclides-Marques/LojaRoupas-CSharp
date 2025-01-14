@@ -109,7 +109,7 @@ namespace LojaRoupas.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Editar(Guid id, [Bind("Id, Nome, DataDeCadastro, Ativo")] Marca marca)
+        public async Task<IActionResult> Editar(Guid id, [Bind("Id, Nome, Ativo")] Marca marca)
         {
             if (id != marca.Id)
             {

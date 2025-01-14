@@ -157,15 +157,20 @@ namespace LojaRoupas.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Editar(Guid id, [Bind("Id,Nome,Tamanho,Cor,Material,Preco,Estoque,Descricao,Genero,DataDeCadastro,CategoriaId,MarcaId,Ativo,ImagemUrl")] Roupa roupa, IFormFile imagem)
+        public async Task<IActionResult> Editar(Guid id, [Bind("Id,Nome,Tamanho,Cor,Material,Preco,Estoque,Descricao,Genero,CategoriaId,MarcaId,Ativo,ImagemUrl")] Roupa roupa, IFormFile imagem)
         {
             if (id != roupa.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
+                if (Request.Form["Genero"].Count > 0)
+                {
+                    roupa.Genero = string.Join(";", Request.Form["Genero"]);
+                }
+
                 try
                 {
                     if (imagem != null && imagem.Length > 0)
@@ -209,7 +214,6 @@ namespace LojaRoupas.Areas.Admin.Controllers
             ViewBag.MarcaId = new SelectList(_context.Marcas, "Id", "Nome", roupa.MarcaId);
             return View(roupa);
         }
-
 
         private bool RoupaExist(Guid id)
         {

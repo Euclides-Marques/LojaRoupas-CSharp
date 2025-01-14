@@ -108,7 +108,7 @@ namespace LojaRoupas.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Editar(Guid id, [Bind("Id, Nome, DataDeCadastro, Ativo")] Categoria categoria)
+        public async Task<IActionResult> Editar(Guid id, [Bind("Id, Nome, Ativo")] Categoria categoria)
         {
             if(id != categoria.Id)
             {
