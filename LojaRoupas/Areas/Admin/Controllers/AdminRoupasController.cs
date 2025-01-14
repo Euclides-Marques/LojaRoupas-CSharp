@@ -88,7 +88,6 @@ namespace LojaRoupas.Areas.Admin.Controllers
             return View(roupa);
         }
 
-
         [HttpGet]
         public async Task<IActionResult> Detalhes(Guid id)
         {
@@ -173,6 +172,8 @@ namespace LojaRoupas.Areas.Admin.Controllers
 
                 try
                 {
+                    var roupaExistente = await _context.Roupas.AsNoTracking().FirstOrDefaultAsync(r => r.Id == roupa.Id);
+
                     if (imagem != null && imagem.Length > 0)
                     {
                         var pastaImagens = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "roupas");
@@ -191,6 +192,10 @@ namespace LojaRoupas.Areas.Admin.Controllers
                         }
 
                         roupa.ImagemUrl = "/images/roupas/" + nomeArquivo;
+                    }
+                    else
+                    {
+                        roupa.ImagemUrl = roupaExistente.ImagemUrl; 
                     }
 
                     _context.Update(roupa);
