@@ -36,22 +36,34 @@
     }
 
     .input-group {
+        display: flex;
+        align-items: center;
         width: 20%;
     }
 
         .input-group .form-control {
             border-radius: 50px !important;
             border: 1px solid #ccc;
+            flex-grow: 1;
         }
+
+    .input-group-text {
+        border-radius: 50px;
+        border: 1px solid #ccc;
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
     #search-addon {
         background-color: transparent;
         border: 0;
         transition: transform 0.4s ease;
+        cursor: pointer;
     }
 
         #search-addon:hover {
-            cursor: pointer;
             transform: scale(1.5);
         }
 
@@ -160,12 +172,13 @@
 
 <div id="itemsContainer" class="container flex-wrap d-none d-md-flex align-items-center justify-content-between">
     <img class="img-responsive" src="~/images/logoPreta.png" id="logoPreta" />
-    <div class="input-group rounded">
-        <input type="search" class="form-control rounded" placeholder="O que você procura?" aria-label="Search" aria-describedby="search-addon" />
-        <span class="input-group-text border-0" id="search-addon">
+    <form method="get" class="input-group rounded">
+        <input type="search" name="filter" class="form-control" placeholder="O que você procura?"
+               aria-label="Search" aria-describedby="search-addon" value="@Model.RouteValue["Filter"]" />
+        <button type="submit" class="input-group-text border-0" id="search-addon">
             <i class="fas fa-search"></i>
-        </span>
-    </div>
+        </button>
+    </form>
     <div class="icons">
         <i id="heart" class="fas fa-heart"></i>
         <i id="cart" class="fa fa-shopping-cart"></i>
