@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<LojaRoupas.Models.Roupa>
+
+@{
     ViewData["Title"] = "::LOJA ROUPA";
 }
 
@@ -7,8 +9,47 @@
 </head>
 
 <style>
-    #carouselExampleIndicators{
-        margin-top: 4.3rem;
+    body {
+        overflow-x: hidden;
+    }
+
+    #carouselExampleIndicators {
+        margin: 4.3rem -7.5rem;
+    }
+
+    ::-webkit-scrollbar {
+        width: 10px;
+        background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #d0d0d0;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #ebebeb;
+    }
+
+    .card {
+        width: 18rem;
+    }
+
+    .card-text {
+        text-align: justify;
+    }
+
+    .btn-group {
+        width: 100%;
+    }
+
+        .btn-group .btn {
+            flex: 1;
+        }
+
+    .card-img-top {
+        width: 100%;
+        height: 300px; 
+        object-fit: cover; 
     }
 </style>
 
@@ -34,7 +75,7 @@
             <img src="~/images/banner3.jpg" class="d-block w-100" alt="Terceiro Slide">
         </div>
     </div>
-    
+
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Anterior</span>
@@ -43,4 +84,25 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Próximo</span>
     </button>
+</div>
+
+<div class="container mt-4">
+    <div class="row">
+        @foreach (var roupa in Model)
+        {
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center mb-4">
+                <div class="card">
+                    <img class="card-img-top" src="@roupa.ImagemUrl" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">@roupa.Nome</h5>
+                        <p class="card-text">@roupa.Descricao</p>
+                        <div class="form-group mt-3 btn-group d-flex">
+                            <a href="#" class="btn btn-primary">Comprar</a>
+                            <a href="#" class="btn btn-secondary">Ver Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>

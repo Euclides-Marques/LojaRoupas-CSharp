@@ -16,7 +16,7 @@ namespace LojaRoupas.Controllers
 
         public async Task<IActionResult> Index(string filter, int pagindex = 1, string sort = "Nome")
         {
-            var resultado = _context.Roupas.Include(r => r.Categoria).Include(r => r.Marca).AsQueryable();
+            var resultado = _context.Roupas.Include(r => r.Categoria).Include(r => r.Marca).Where(r => r.Ativo == true).AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(filter))
             {
@@ -24,7 +24,7 @@ namespace LojaRoupas.Controllers
             }
 
             var model = await PagingList.CreateAsync(resultado, 5, pagindex, sort, "Nome");
-            model.RouteValue = new RouteValueDictionary { { "filter", filter } };
+            ViewData["Filter"] = filter;
             return View(model);
         }
     }

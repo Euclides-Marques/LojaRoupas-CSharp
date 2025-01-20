@@ -17,7 +17,7 @@ namespace LojaRoupas.Controllers
             _dbContext = dbContext;
         }
 
-        public async Task<IActionResult> MeusDados(Guid id)
+        public async Task<IActionResult> MeusDados()
         {
             var user = await _userManager.GetUserAsync(User);
 
