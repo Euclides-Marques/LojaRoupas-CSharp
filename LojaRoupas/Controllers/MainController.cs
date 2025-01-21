@@ -23,7 +23,7 @@ namespace LojaRoupas.Controllers
                 resultado = resultado.Where(r => r.Nome.Contains(filter));
             }
 
-            var model = await PagingList.CreateAsync(resultado, 5, pagindex, sort, "Nome");
+            var model = await PagingList.CreateAsync(resultado, resultado.Count(), pagindex, sort, "Nome");
             ViewData["Filter"] = filter;
             return View(model);
         }
