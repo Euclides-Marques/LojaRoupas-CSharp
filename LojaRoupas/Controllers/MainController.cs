@@ -27,5 +27,20 @@ namespace LojaRoupas.Controllers
             ViewData["Filter"] = filter;
             return View(model);
         }
+
+        public IActionResult Detalhes()
+        {
+            return View();
+        }
+
+        public IActionResult Carrinho()
+        {
+            return View();
+        }
+
+        public IActionResult Favoritos()
+        {
+            return View();
+        }
     }
 }
