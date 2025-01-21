@@ -28,9 +28,22 @@ namespace LojaRoupas.Controllers
             return View(model);
         }
 
-        public IActionResult Detalhes()
+        [HttpGet("Detalhes/{id:guid}")]
+        public async Task<IActionResult> Detalhes(Guid id)
         {
-            return View();
+            if(id == null) 
+            {
+                return NotFound();
+            }
+
+            var roupa = await _context.Roupas.Include(c => c.Categoria).Include(m => m.Marca).FirstOrDefaultAsync(r => r.Id == id);
+
+            if(roupa == null)
+            {
+                return NotFound();
+            }
+
+            return View(roupa);
         }
 
         public IActionResult Carrinho()
