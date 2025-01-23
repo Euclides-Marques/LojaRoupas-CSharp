@@ -142,6 +142,7 @@
 
     .dropdown:hover .dropdown-menu {
         display: block;
+        cursor: pointer;
     }
 </style>
 
@@ -203,7 +204,7 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         @foreach (var cat in categorias)
                         {
-                            <li><a class="dropdown-item" href="#">@cat.Nome</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("GetRoupasByCategoria", "Main", new { categoriaId = cat.Id })">@cat.Nome</a></li>
                         }
                     </ul>
                 </li>
@@ -214,7 +215,7 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         @foreach (var marca in marcas)
                         {
-                            <li><a class="dropdown-item" href="#">@marca.Nome</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("GetRoupasByMarca", "Main", new { marcaId = marca.Id })">@marca.Nome</a></li>
                         }
                     </ul>
                 </li>
