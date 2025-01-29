@@ -1,1 +1,130 @@
-﻿<h1>FUNCIONOU</h1>
+﻿@model IEnumerable<LojaRoupas.Models.Roupa>
+
+@{
+    ViewData["Title"] = "::LOJA ROUPA";
+    var categoriaId = ViewData["CategoriaId"];
+    var marcaId = ViewData["MarcaId"];
+}
+
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+</head>
+
+<style>
+    body {
+        overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar {
+        width: 10px;
+        background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #d0d0d0;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #ebebeb;
+    }
+
+    .card {
+        width: 18rem;
+    }
+
+    .card-img-top {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+    }
+
+    .card-text {
+        position: absolute;
+        font-size: 1rem;
+        color: #FFF;
+        transform: translateX(-50%);
+        top: 30%;
+        display: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        background-color: rgba(0, 0, 0, 1);
+        cursor: pointer;
+    }
+
+    .eye-text {
+        left: 30%;
+    }
+
+    .cart-text {
+        left: 70%;
+    }
+
+    .card-text:hover {
+        color: #FF4500;
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    div #roupasFav{
+        margin-top: 10%;
+    }
+</style>
+
+<div>
+    <partial name="_LayoutSuperior" />
+</div>
+
+<div id="roupasFav" class="container mt-4">
+    <div class="row">
+        @foreach (var roupa in Model)
+        {
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center mb-4">
+                <div class="card">
+                    <img class="card-img-top" src="@roupa.ImagemUrl" alt="Card image cap">
+
+                    <div class="card-icon-container">
+                        <div class="card-icon eye-icon" onclick="window.location.href='@Url.Action("Detalhes", "Main", new { id = roupa.Id })'">
+                            <div class="card-text eye-text">
+                                Detalhes
+                            </div>
+                        </div>
+
+                        <div class="card-icon cart-icon" onclick="window.location.href='@Url.Action("Carrinho", "Main", new { id = roupa.Id })'">
+                            <div class="card-text cart-text">
+                                Comprar
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <h3 class="card-title text-center">@roupa.Nome</h3>
+                        <p class="card-title text-center">@roupa.Descricao</p>
+                        <hr />
+                        <h4 class="card-title text-center">R$: @roupa.Preco</h4>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    const cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => {
+        const eyeText = card.querySelector('.eye-text');
+        const cartText = card.querySelector('.cart-text');
+        const img = card.querySelector('.card-img-top');
+
+        card.addEventListener('mouseenter', () => {
+            img.style.filter = 'blur(5px)';
+            eyeText.style.display = 'block';
+            cartText.style.display = 'block';
+        });
+
+        card.addEventListener('mouseleave', () => {
+            img.style.filter = 'none';
+            eyeText.style.display = 'none';
+            cartText.style.display = 'none';
+        });
+    });
+</script>

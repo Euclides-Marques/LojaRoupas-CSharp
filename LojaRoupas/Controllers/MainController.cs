@@ -86,9 +86,32 @@ namespace LojaRoupas.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Favoritar(Guid id)
+        {
+            var roupa = _context.Roupas.Find(id);
+
+            if (roupa == null)
+            {
+                return NotFound();
+            }
+
+            roupa.Favorito = !roupa.Favorito;
+
+            _context.Update(roupa);
+            _context.SaveChanges();
+
+            
+
+            return RedirectToAction("Favoritos");
+        }
+
+        [HttpGet]
         public IActionResult Favoritos()
         {
-            return View();
+            var roupasFav = _context.Roupas.Include(c => c.Categoria).Include(m => m.Marca).Where(r => r.Favorito == true);
+
+            return View(roupasFav);
         }
     }
 }

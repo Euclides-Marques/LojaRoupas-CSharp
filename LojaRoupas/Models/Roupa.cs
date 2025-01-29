@@ -25,6 +25,7 @@ namespace LojaRoupas.Models
 
         [ForeignKey("Marca")]
         public Guid MarcaId { get; set; }
+        public bool Favorito { get; set; }
 
         public virtual Categoria Categoria { get; set; }
         public virtual Marca Marca { get; set; }
