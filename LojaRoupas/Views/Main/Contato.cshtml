@@ -2,17 +2,118 @@
     ViewData["Title"] = "::LOJA ROUPA";
 }
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+</head>
 
 <style>
     body {
         overflow: hidden;
     }
 
-    
+    #container {
+        margin-top: 7%;
+    }
+
+    aside.sidebar .single {
+        padding: 30px 15px;
+        margin-top: 40px;
+        background: #fcfcfc;
+        border: 1px solid #f0f0f0;
+    }
+
+        aside.sidebar .single h3.side-title {
+            margin: 0;
+            margin-bottom: 10px;
+            padding: 0;
+            font-size: 20px;
+            color: #333;
+            text-transform: uppercase;
+        }
+
+            aside.sidebar .single h3.side-title:after {
+                content: '';
+                width: 60px;
+                height: 1px;
+                background: #00b0ff;
+                display: block;
+                margin-top: 6px;
+            }
+
+    .single.contact-info {
+        background: none;
+        border: none;
+    }
+
+        .single.contact-info li {
+            margin-top: 30px;
+        }
+
+            .single.contact-info li .icon {
+                display: block;
+                float: left;
+                margin-right: 10px;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                border: 1px solid #f0f0f0;
+                color: #00b0ff;
+                text-align: center;
+                line-height: 50px;
+            }
+
+            .single.contact-info li .info {
+                overflow: hidden;
+            }
+
+    .map-container {
+        margin-top: 40px;
+    }
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .col-md-6 {
+        flex: 1;
+        margin: 0 10px;
+    }
 </style>
 
 <div>
     <partial name="_LayoutSuperior" />
 </div>
 
+<div id="container" class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <aside class="sidebar">
+                <div class="single contact-info">
+                    <h3 class="side-title">Contact Information</h3>
+                    <ul class="list-unstyled">
+                        <li>
+                            <div class="icon"><i class="fa fa-map-marker"></i></div>
+                            <div class="info"><p>Avenida Paulista, 1000 <br>São Paulo, SP</p></div>
+                        </li>
+
+                        <li>
+                            <div class="icon"><i class="fa fa-phone"></i></div>
+                            <div class="info"><p>(11) 98765-4321<br>(11) 12345-6789</p></div>
+                        </li>
+
+                        <li>
+                            <div class="icon"><i class="fa fa-envelope"></i></div>
+                            <div class="info"><p>contato@empresa.com.br<br>vendas@empresa.com.br</p></div>
+                        </li>
+
+                    </ul>
+                </div>
+            </aside>
+        </div>
+
+        <div class="col-md-6 map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.8892452045847!2d-46.63624668502386!3d-23.56313938468773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59e74831a0c7%3A0x3f38a20996bcd764!2sRua%20Augusta%2C%20S%C3%A3o%20Paulo%2C%20SP!5e0!3m2!1spt-BR!2sbr!4v1612430196589" width="100%" height="430" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
