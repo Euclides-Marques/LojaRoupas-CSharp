@@ -81,11 +81,6 @@ namespace LojaRoupas.Controllers
             return RedirectToAction("Index", new { marcaId });
         }
 
-        public IActionResult Carrinho()
-        {
-            return View();
-        }
-
         [HttpGet]
         public IActionResult Favoritar(Guid id)
         {
@@ -112,6 +107,32 @@ namespace LojaRoupas.Controllers
             var roupasFav = _context.Roupas.Include(c => c.Categoria).Include(m => m.Marca).Where(r => r.Favorito == true);
 
             return View(roupasFav);
+        }
+
+        [HttpGet]
+        public IActionResult AddCarrinho(Guid id)
+        {
+            var roupa = _context.Roupas.Find(id);
+
+            if(roupa == null)
+            {
+                return NotFound();
+            }
+
+            roupa.AdicionarCarrinho = !roupa.AdicionarCarrinho;
+
+            _context.Update(roupa);
+            _context.SaveChanges();
+
+            return RedirectToAction("Carrinho");
+        }
+
+        [HttpGet]
+        public IActionResult Carrinho()
+        {
+            var roupaCarrinhno = _context.Roupas.Include(c => c.Categoria).Include(m => m.Marca).Where(rc => rc.AdicionarCarrinho == true);
+
+            return View(roupaCarrinhno);
         }
     }
 }
