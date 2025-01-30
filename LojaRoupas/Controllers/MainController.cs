@@ -134,5 +134,13 @@ namespace LojaRoupas.Controllers
 
             return View(roupaCarrinhno);
         }
+
+        [HttpGet]
+        public JsonResult GetCarrinhoCount()
+        {
+            var count = _context.Roupas.Count(rc => rc.AdicionarCarrinho == true);
+            return Json(new { count });
+        }
+
     }
 }
