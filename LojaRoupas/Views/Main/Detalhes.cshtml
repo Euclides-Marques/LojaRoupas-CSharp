@@ -99,7 +99,7 @@
                         <p><strong>Tamanho:</strong> @Html.DisplayFor(model => model.Tamanho)</p>
                         <p><strong>Cor:</strong> @Html.DisplayFor(model => model.Cor)</p>
                         <p><strong>Material:</strong> @Html.DisplayFor(model => model.Material)</p>
-                        @if(Model.Promocao = true){
+                        @if(Model.Promocao == true){
                             <p><strong>Preço:</strong> @Html.DisplayFor(model => model.PrecoPromocao)</p>
                         }
                         else{
