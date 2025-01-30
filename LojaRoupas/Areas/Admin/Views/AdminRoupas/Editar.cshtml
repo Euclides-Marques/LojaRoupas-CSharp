@@ -134,9 +134,16 @@
                             <span asp-validation-for="Genero" class="text-danger"></span>
                         </div>
                         <div class="col">
-                            <label asp-for="Ativo" class="control-label">Ativo</label>
-                            <input asp-for="Ativo" class="form-check-input" type="checkbox" />
-                            <span asp-validation-for="Ativo" class="text-danger"></span>
+                            <div class="form-check">
+                                <label asp-for="Ativo" class="control-label">Ativo</label>
+                                <input asp-for="Ativo" class="form-check-input" type="checkbox" />
+                                <span asp-validation-for="Ativo" class="text-danger"></span>
+                            </div>
+                            <div class="form-check">
+                                <label asp-for="Lancamento" class="control-label">Lançamento</label>
+                                <input asp-for="Lancamento" class="form-check-input" type="checkbox" />
+                                <span asp-validation-for="Lancamento" class="text-danger"></span>
+                            </div>
                         </div>
                     </div>
 

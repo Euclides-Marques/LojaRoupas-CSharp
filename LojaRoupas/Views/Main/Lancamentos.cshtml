@@ -1,0 +1,172 @@
+﻿@model IEnumerable<LojaRoupas.Models.Roupa>
+
+@{
+    ViewData["Title"] = "::LOJA ROUPA";
+    var categoriaId = ViewData["CategoriaId"];
+    var marcaId = ViewData["MarcaId"];
+}
+
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+</head>
+
+<style>
+    body {
+        overflow-x: hidden;
+    }
+
+    #carouselExampleIndicators {
+        margin: 3.5rem -7.5rem;
+    }
+
+    ::-webkit-scrollbar {
+        width: 10px;
+        background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #d0d0d0;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #ebebeb;
+    }
+
+    .card {
+        width: 18rem;
+    }
+
+    .card-img-top {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+    }
+
+    .card-text {
+        position: absolute;
+        font-size: 1rem;
+        color: #FFF;
+        transform: translateX(-50%);
+        top: 30%;
+        display: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        background-color: rgba(0, 0, 0, 1);
+        cursor: pointer;
+    }
+
+    .eye-text {
+        left: 16%;
+    }
+
+    .cart-text {
+        left: 50%;
+    }
+
+    .heart-text {
+        left: 85%;
+    }
+
+    .card-text:hover {
+        color: #FF4500;
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+</style>
+
+<div>
+    <partial name="_LayoutSuperior" />
+</div>
+
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/images/banner1.png" class="d-block w-100" alt="Primeiro Slide">
+        </div>
+        <div class="carousel-item">
+            <img src="~/images/banner2.png" class="d-block w-100" alt="Segundo Slide">
+        </div>
+        <div class="carousel-item">
+            <img src="~/images/banner3.png" class="d-block w-100" alt="Terceiro Slide">
+        </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Próximo</span>
+    </button>
+</div>
+
+<div class="container mt-4">
+    <div class="row">
+        @foreach (var roupa in Model)
+        {
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center mb-4">
+                <div class="card">
+                    <img class="card-img-top" src="@roupa.ImagemUrl" alt="Card image cap">
+
+                    <div class="card-icon-container">
+                        <div class="card-icon eye-icon" onclick="window.location.href='@Url.Action("Detalhes", "Main", new { id = roupa.Id })'">
+                            <div class="card-text eye-text">
+                                Detalhes
+                            </div>
+                        </div>
+
+                        <div class="card-icon cart-icon" onclick="window.location.href='@Url.Action("AddCarrinho", "Main", new { id = roupa.Id })'">
+                            <div class="card-text cart-text">
+                                Comprar
+                            </div>
+                        </div>
+
+                        <div class="card-icon heart-icon" onclick="window.location.href='@Url.Action("Favoritar", "Main", new { id = roupa.Id })'">
+                            <div class="card-text heart-text">
+                                Favoritar
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <h3 class="card-title text-center">@roupa.Nome</h3>
+                        <p class="card-title text-center">@roupa.Descricao</p>
+                        <hr />
+                        <h4 class="card-title text-center">R$: @roupa.Preco</h4>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    const cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => {
+        const eyeText = card.querySelector('.eye-text');
+        const cartText = card.querySelector('.cart-text');
+        const heartText = card.querySelector('.heart-text');
+        const img = card.querySelector('.card-img-top');
+
+        card.addEventListener('mouseenter', () => {
+            img.style.filter = 'blur(5px)';
+            eyeText.style.display = 'block';
+            cartText.style.display = 'block';
+            heartText.style.display = 'block';
+        });
+
+        card.addEventListener('mouseleave', () => {
+            img.style.filter = 'none';
+            eyeText.style.display = 'none';
+            cartText.style.display = 'none';
+            heartText.style.display = 'none';
+        });
+    });
+</script>

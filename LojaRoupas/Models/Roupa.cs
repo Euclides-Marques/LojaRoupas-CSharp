@@ -27,6 +27,7 @@ namespace LojaRoupas.Models
         public Guid MarcaId { get; set; }
         public bool Favorito { get; set; }
         public bool AdicionarCarrinho { get; set; }
+        public bool Lancamento { get; set; }
 
         public virtual Categoria Categoria { get; set; }
         public virtual Marca Marca { get; set; }

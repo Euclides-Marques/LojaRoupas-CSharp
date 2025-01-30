@@ -147,5 +147,13 @@ namespace LojaRoupas.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult Lancamentos()
+        {
+            var roupasLanc = _context.Roupas.Include(c => c.Categoria).Include(m => m.Marca).Where(r => r.Lancamento == true);
+
+            return View(roupasLanc);
+        }
     }
 }

@@ -35,7 +35,7 @@ namespace LojaRoupas.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Tamanho,Cor,Material,Preco,Estoque,Descricao,Genero,DataDeCadastro,CategoriaId,MarcaId,Ativo")] Roupa roupa, IFormFile imagem)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Tamanho,Cor,Material,Preco,Estoque,Descricao,Genero,DataDeCadastro,CategoriaId,MarcaId,Ativo,Lancamento")] Roupa roupa, IFormFile imagem)
         {
             if (!ModelState.IsValid)
             {
@@ -147,7 +147,7 @@ namespace LojaRoupas.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Editar(Guid id, [Bind("Id,Nome,Tamanho,Cor,Material,Preco,Estoque,Descricao,Genero,CategoriaId,MarcaId,Ativo,ImagemUrl")] Roupa roupa, IFormFile imagem)
+        public async Task<IActionResult> Editar(Guid id, [Bind("Id,Nome,Tamanho,Cor,Material,Preco,Estoque,Descricao,Genero,CategoriaId,MarcaId,Ativo,ImagemUrl,Lancamento")] Roupa roupa, IFormFile imagem)
         {
             if (id != roupa.Id)
             {
