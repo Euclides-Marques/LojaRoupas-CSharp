@@ -142,5 +142,10 @@ namespace LojaRoupas.Controllers
             return Json(new { count });
         }
 
+        [HttpGet]
+        public IActionResult Contato()
+        {
+            return View();
+        }
     }
 }
