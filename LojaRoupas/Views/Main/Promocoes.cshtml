@@ -142,13 +142,8 @@
                         <h3 class="card-title text-center">@roupa.Nome</h3>
                         <p class="card-title text-center">@roupa.Descricao</p>
                         <hr />
-                        @if(roupa.Promocao == true){
-                            <h4 class="card-title text-center"><del>R$: @roupa.Preco</del></h4>
-                            <h4 class="card-title text-center">R$: @roupa.PrecoPromocao</h4>
-                        }
-                        else{
-                            <h4 class="card-title text-center">R$: @roupa.Preco</h4>
-                        }
+                        <h4 class="card-title text-center"><del>R$: @roupa.Preco</del></h4>
+                        <h4 class="card-title text-center">R$: @roupa.PrecoPromocao</h4>
                     </div>
                 </div>
             </div>

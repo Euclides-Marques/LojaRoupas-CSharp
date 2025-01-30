@@ -155,5 +155,13 @@ namespace LojaRoupas.Controllers
 
             return View(roupasLanc);
         }
+
+        [HttpGet]
+        public IActionResult Promocoes()
+        {
+            var roupasLanc = _context.Roupas.Include(c => c.Categoria).Include(m => m.Marca).Where(r => r.Promocao == true);
+
+            return View(roupasLanc);
+        }
     }
 }

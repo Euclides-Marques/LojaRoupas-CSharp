@@ -27,7 +27,7 @@
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         width: 100%;
-        max-width: 500px;
+        max-width: 900px;
     }
 
     h1 {
@@ -60,7 +60,7 @@
 <h1 class="text-center mb-4">CRIAR ROUPA</h1>
 
 <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="card shadow-sm">
             <div class="card-body">
                 <form asp-action="Create" method="post" enctype="multipart/form-data">
@@ -77,22 +77,21 @@
                             <input asp-for="Tamanho" class="form-control" />
                             <span asp-validation-for="Tamanho" class="text-danger"></span>
                         </div>
-                    </div>
 
-                    <div class="row form-group">
                         <div class="col">
                             <label asp-for="Cor" class="control-label">Cor</label>
                             <input asp-for="Cor" class="form-control" />
                             <span asp-validation-for="Cor" class="text-danger"></span>
                         </div>
+                    </div>
+
+                    <div class="row form-group">
                         <div class="col">
                             <label asp-for="Material" class="control-label">Material</label>
                             <input asp-for="Material" class="form-control" />
                             <span asp-validation-for="Material" class="text-danger"></span>
                         </div>
-                    </div>
 
-                    <div class="row form-group">
                         <div class="col">
                             <label asp-for="Preco" class="control-label">Preço</label>
                             <input asp-for="Preco" class="form-control" />
@@ -116,9 +115,7 @@
                             <input type="file" class="form-control" name="imagem" />
                             <span asp-validation-for="ImagemUrl" class="text-danger"></span>
                         </div>
-                    </div>
 
-                    <div class="row form-group">
                         <div class="col">
                             <label class="control-label">Gênero</label>
                             <div class="form-check">
@@ -131,14 +128,15 @@
                             </div>
                             <span asp-validation-for="Genero" class="text-danger"></span>
                         </div>
+                    </div>
+
+                    <div class="row form-group">
                         <div class="col">
                             <label asp-for="DataDeCadastro" class="control-label">Data de Cadastro</label>
                             <input asp-for="DataDeCadastro" class="form-control" type="date" />
                             <span asp-validation-for="DataDeCadastro" class="text-danger"></span>
                         </div>
-                    </div>
 
-                    <div class="row form-group">
                         <div class="col">
                             <label asp-for="CategoriaId" class="control-label">Categoria</label>
                             <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId">
@@ -146,6 +144,7 @@
                             </select>
                             <span asp-validation-for="CategoriaId" class="text-danger"></span>
                         </div>
+
                         <div class="col">
                             <label asp-for="MarcaId" class="control-label">Marca</label>
                             <select asp-for="MarcaId" class="form-control" asp-items="ViewBag.MarcaId">
@@ -169,6 +168,22 @@
                                 <input asp-for="Lancamento" class="form-check-input" type="checkbox" />
                                 <span asp-validation-for="Lancamento" class="text-danger"></span>
                             </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-group form-check">
+                                <label class="form-check-label" for="Promocao">Promoção</label>
+                                <input asp-for="Promocao" class="form-check-input" type="checkbox" />
+                                <span asp-validation-for="Promocao" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-4">
+                            <label asp-for="PrecoPromocao" class="control-label">Preço da Promoção</label>
+                            <input asp-for="PrecoPromocao" class="form-control" />
+                            <span asp-validation-for="PrecoPromocao" class="text-danger"></span>
                         </div>
                     </div>
 

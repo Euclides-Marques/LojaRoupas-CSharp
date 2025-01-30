@@ -28,6 +28,8 @@ namespace LojaRoupas.Models
         public bool Favorito { get; set; }
         public bool AdicionarCarrinho { get; set; }
         public bool Lancamento { get; set; }
+        public bool Promocao { get; set; }
+        public decimal PrecoPromocao { get; set; }
 
         public virtual Categoria Categoria { get; set; }
         public virtual Marca Marca { get; set; }

@@ -81,12 +81,14 @@
                         <p><strong>Data de Cadastro:</strong> @Html.DisplayFor(model => model.DataDeCadastro)</p>
                         <p><strong>Categoria:</strong> @Html.DisplayFor(model => model.Categoria.Nome)</p>
                         <p><strong>Preço:</strong> @Html.DisplayFor(model => model.Preco)</p>
-                    </div>
-                    <div class="col">
                         <p><strong>Em Estoque:</strong> @Html.DisplayFor(model => model.Estoque)</p>
                         <p><strong>Marca:</strong> @Html.DisplayFor(model => model.Marca.Nome)</p>
+                    </div>
+                    <div class="col">
                         <p><strong>Ativo:</strong> @(Model.Ativo ? "Sim" : "Não")</p>
                         <p><strong>Lançamento:</strong> @(Model.Lancamento ? "Sim" : "Não")</p>
+                        <p><strong>Promoção:</strong> @(Model.Promocao ? "Sim" : "Não")</p>
+                        <p><strong>Preço da Promoção:</strong> @Html.DisplayFor(model => model.PrecoPromocao)</p>
                     </div>
                 </div>
                 <form asp-action="Deletar" class="form-group mt-3 btn-group d-flex">
