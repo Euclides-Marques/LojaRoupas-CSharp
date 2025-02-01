@@ -83,6 +83,14 @@
     #titleResumoCompra, #itens {
         margin-bottom: 1.5rem;
     }
+
+    .btn-group {
+        width: 100%;
+    }
+
+        .btn-group .btn {
+            flex: 1;
+        }
 </style>
 
 <div>
@@ -123,5 +131,9 @@
         </ul>
         <hr>
         <h4>Total: R$ @Model.Sum(r => r.Promocao ? r.PrecoPromocao : r.Preco)</h4>
+
+        <div class="form-group mt-3 btn-group d-flex">
+            <a asp-controller="Main" asp-action="PedidoFinalizado" class="btn btn-success">Finalizar Compra</a>
+        </div>
     </div>
 </div>

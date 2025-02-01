@@ -163,5 +163,21 @@ namespace LojaRoupas.Controllers
 
             return View(roupasLanc);
         }
+
+        [HttpGet]
+        public IActionResult PedidoFinalizado()
+        {
+            var roupasCarrinho = _context.Roupas.Where(r => r.AdicionarCarrinho == true).ToList();
+
+            foreach (var roupa in roupasCarrinho)
+            {
+                roupa.AdicionarCarrinho = false;
+            }
+
+            _context.SaveChanges();
+
+            return View();
+        }
+
     }
 }
