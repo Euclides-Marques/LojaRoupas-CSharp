@@ -28,19 +28,60 @@
         background: #ebebeb;
     }
 
+    .container-loja {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-top: 7%;
+    }
+
+    .lista-produtos {
+        width: 60%;
+    }
+
     .card {
-        margin-top: 20%;
-        width: 18rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        max-width: 600px;
+        height: 150px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
     }
 
     .card-img-top {
-        width: 100%;
-        height: 300px;
+        width: 120px;
+        height: 120px;
         object-fit: cover;
+        border-radius: 5px;
+    }
+
+    .card-title {
+        font-size: 1rem;
+        margin-bottom: 5px;
     }
 
     del {
         color: red;
+    }
+
+    .ordem-servico {
+        width: 35%;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        height: fit-content;
+    }
+
+    #titleResumoCompra, #itens {
+        margin-bottom: 1.5rem;
     }
 </style>
 
@@ -48,28 +89,39 @@
     <partial name="_LayoutSuperior" />
 </div>
 
-<div class="container mt-4">
-    <div class="row">
+<div class="container-loja">
+    <div class="lista-produtos">
         @foreach (var roupa in Model)
         {
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center mb-4">
-                <div class="card">
-                    <img class="card-img-top" src="@roupa.ImagemUrl" alt="Card image cap">
-
-                    <div class="card-body">
-                        <h3 class="card-title text-center">@roupa.Nome</h3>
-                        <p class="card-title text-center">@roupa.Descricao</p>
-                        <hr />
-                        @if(roupa.Promocao == true){
-                            <h4 class="card-title text-center"><del>R$: @roupa.Preco</del></h4>
-                            <h4 class="card-title text-center">R$: @roupa.PrecoPromocao</h4>
-                        }
-                        else{
-                            <h4 class="card-title text-center">R$: @roupa.Preco</h4>
-                        }
-                    </div>
+            <div class="card">
+                <img class="card-img-top" src="@roupa.ImagemUrl" alt="Card image cap">
+                <div class="card-body">
+                    <h3 class="card-title">@roupa.Nome</h3>
+                    <p class="card-title">@roupa.Descricao</p>
+                    <hr />
+                    @if (roupa.Promocao == true)
+                    {
+                        <h4 class="card-title"><del>R$: @roupa.Preco</del></h4>
+                        <h4 class="card-title">R$: @roupa.PrecoPromocao</h4>
+                    }
+                    else
+                    {
+                        <h4 class="card-title">R$: @roupa.Preco</h4>
+                    }
                 </div>
             </div>
         }
+    </div>
+
+    <div class="ordem-servico">
+        <h3 id="titleResumoCompra" class="text-center">Resumo da Compra</h3>
+        <ul>
+            @foreach (var roupa in Model)
+            {
+                <li id="itens">@roupa.Nome - R$ @(roupa.Promocao ? roupa.PrecoPromocao : roupa.Preco)</li>
+            }
+        </ul>
+        <hr>
+        <h4>Total: R$ @Model.Sum(r => r.Promocao ? r.PrecoPromocao : r.Preco)</h4>
     </div>
 </div>
