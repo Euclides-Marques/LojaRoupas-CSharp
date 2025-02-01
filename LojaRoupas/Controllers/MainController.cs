@@ -169,6 +169,11 @@ namespace LojaRoupas.Controllers
         {
             var roupasCarrinho = _context.Roupas.Where(r => r.AdicionarCarrinho == true).ToList();
 
+            if(roupasCarrinho.Count() < 1)
+            {
+                return NotFound();
+            }
+
             foreach (var roupa in roupasCarrinho)
             {
                 roupa.AdicionarCarrinho = false;
