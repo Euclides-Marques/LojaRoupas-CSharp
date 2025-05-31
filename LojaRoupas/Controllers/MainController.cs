@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Asn1.X509;
 using ReflectionIT.Mvc.Paging;
 using System.Diagnostics.Contracts;
 using System.Formats.Asn1;
@@ -225,6 +226,9 @@ namespace LojaRoupas.Controllers
         {
             if (arquivo == null || arquivo.Length == 0)
                 return RedirectToAction("Error", "Main");
+
+            var extensao = Path.GetExtension(arquivo.FileName).ToLower();
+            if (extensao != ".csv") return BadRequest("Erro ao importar o arquivo! Apenas arquivos .csv são permitidos.");
 
             var user = await _userManager.GetUserAsync(User);
             if (user == null) return Unauthorized();
