@@ -224,7 +224,7 @@ namespace LojaRoupas.Controllers
         public async Task<IActionResult> ImportarContratos(IFormFile arquivo)
         {
             if (arquivo == null || arquivo.Length == 0)
-                return RedirectToAction("Error", "Main"); ;
+                return RedirectToAction("Error", "Main");
 
             var user = await _userManager.GetUserAsync(User);
             if (user == null) return Unauthorized();

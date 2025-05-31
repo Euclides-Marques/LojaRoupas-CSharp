@@ -10,17 +10,30 @@
             margin-top: 7%;
         }
 
-        .notify-success {
-            color: green;
-            padding: 10px;
-            border: 1px solid green;
-            border-radius: 5px;
-            margin-bottom: 20px;
+        .notify {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            z-index: 9999;
+            color: white;
+            text-align: center;
             display: none;
         }
 
+        .notify-success {
+            background-color: #4CAF50;
+        }
+
+        .notify-error {
+            background-color: #f44336;
+        }
+
         .table {
-            margin-top: 20px;
+            margin-top: 23px;
         }
     </style>
 </head>
@@ -30,15 +43,15 @@
 </div>
 
 <div class="container-contratos">
-    <h3>Importar Contratos</h3>
-    <div class="notify-success" id="successMessage">Importado com sucesso!</div>
+    <h3>Contratos</h3>
 
-    <form asp-controller="Main" asp-action="ImportarContratos" enctype="multipart/form-data" method="post">
+    <div id="notify" class="notify"></div>
+
+    <form id="formImportacao" enctype="multipart/form-data" class="d-flex gap-2 align-items-center">
         <input type="file" name="arquivo" class="form-control" />
-        <button type="submit" class="btn btn-primary mt-2">Importar</button>
+        <button type="submit" class="btn btn-primary">Importar</button>
     </form>
 
-    <h4 class="mt-4">Contratos Importados</h4>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -71,13 +84,61 @@
             }
         </tbody>
     </table>
+
+    @* Paginação de 5 em cinco contratos*@
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center mt-4">
+            @for (int i = 1; i <= (int)ViewBag.TotalPaginas; i++)
+            {
+                <li class="page-item @(ViewBag.PaginaAtual == i ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Contrato", "Main", new { page = i })">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(function () {
-        var msg = '@TempData["SuccessMessage"]';
-        if (msg) {
-            $('#successMessage').text(msg).fadeIn().delay(3000).fadeOut();
+        $("#formImportacao").submit(function (e) {
+        e.preventDefault();
+
+        var fileInput = $('input[name="arquivo"]')[0];
+        if (!fileInput.files.length) {
+            showNotify("Selecione um arquivo para importar.", false);
+            return;
         }
+
+        var formData = new FormData(this);
+
+        $.ajax({
+            url: '@Url.Action("ImportarContratos", "Main")',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function () {
+                showNotify("Importado com sucesso!", true);
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
+            },
+            error: function (xhr) {
+                let msg = xhr.responseText || "Erro ao importar o arquivo!";
+                showNotify(msg, false);
+            }
+        });
     });
+
+    function showNotify(message, isSuccess) {
+        var notify = $("#notify");
+        notify.text(message)
+        .removeClass("notify-success notify-error")
+        .addClass(isSuccess ? "notify-success" : "notify-error")
+        .fadeIn();
+
+        setTimeout(function () {
+            notify.fadeOut();
+        }, 3000);
+    }
 </script>
