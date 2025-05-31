@@ -20,5 +20,6 @@ namespace LojaRoupas.Models
 
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataInclusao { get; set; }
+        public bool Ativo { get; set; }
     }
 }

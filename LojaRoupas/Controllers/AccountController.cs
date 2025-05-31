@@ -87,6 +87,7 @@ namespace LojaRoupas.Controllers
                 cliente.Estado = registroVM.Estado;
                 cliente.Cidade = registroVM.Cidade;
                 cliente.DataInclusao = DateTime.UtcNow.AddHours(-3);
+                cliente.Ativo = true;
 
                 _dbContext.Clientes.Add(cliente);
                 await _dbContext.SaveChangesAsync();

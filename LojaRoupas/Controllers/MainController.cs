@@ -191,5 +191,11 @@ namespace LojaRoupas.Controllers
             return View();
         }
 
+        //Aqui eu estou vendo os contratos que foram importados pelo usuário que está logado no sistema
+        [HttpGet]
+        public IActionResult Contrato() 
+        { 
+            return View();
+        }
     }
 }
