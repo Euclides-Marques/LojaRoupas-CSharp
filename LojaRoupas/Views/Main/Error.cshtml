@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Login Inválido";
+    ViewData["Title"] = "Erro ao importar arquivo";
 }
 
 <style>
@@ -44,15 +44,14 @@
     }
 </style>
 
-@*Quando o cliente faz o login errado e é validado no back-end, para não dar brecha para hacker,
-    será apenas informado que o login está errado
+@*Quando o cliente faz a importação do arquivo errado e é validado no back-end, ele terá que voltar e tentar a importação novamente
 *@
 <div class="card">
     <div class="card-body text-center">
         <h1>@ViewData["Title"]</h1>
         <br />
-        <p>O login informado é inválido. Por favor, tente novamente.</p>
+        <p>O arquivo importado é inválido. Por favor, tente novamente.</p>
         <br />
-        <a href="@Url.Action("Index", "Home")" class="btn btn-danger">Voltar ao login</a>
+        <a href="@Url.Action("Contrato", "Main")" class="btn btn-danger">Voltar</a>
     </div>
 </div>
