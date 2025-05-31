@@ -1,1 +1,86 @@
-﻿<h1>FUNCIONOU</h1>
+﻿@{
+    ViewData["Title"] = "::LOJA ROUPA";
+}
+
+<div>
+    <partial name="_LayoutSuperior" />
+</div>
+
+@{
+    ViewData["Title"] = "::Importar Contratos";
+}
+
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <style>
+        .container {
+            margin-top: 7%;
+        }
+
+        .notify-success {
+            color: green;
+            padding: 10px;
+            border: 1px solid green;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .table {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<div class="container">
+    <h3>Importar Contratos</h3>
+    <div class="notify-success" id="successMessage">Importado com sucesso!</div>
+
+    <form asp-controller="Main" asp-action="ImportarContratos" enctype="multipart/form-data" method="post">
+        <input type="file" name="arquivo" class="form-control" />
+        <button type="submit" class="btn btn-primary mt-2">Importar</button>
+    </form>
+
+    <h4 class="mt-4">Contratos Importados</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Contrato</th>
+                <th>Produto</th>
+                <th>Valor</th>
+                <th>Usuário</th>
+                <th>Arquivo</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Nome</td>
+                    <td>@item.CPF</td>
+                    <td>@item.NumeroContrato</td>
+                    <td>@item.Produto</td>
+                    <td>R$ @item.Valor</td>
+                    <td>@item.UsuarioImportador</td>
+                    <td>@item.DataImportacao.ToShortDateString()</td>
+                    <td>
+                        <a asp-action="DetalhesContrato" asp-route-id="@item.Id" class="btn btn-info btn-sm">Ver</a>
+                        <a asp-action="ResumoCliente" asp-route-id="@item.Id" class="btn btn-success btn-sm">Consulta Total</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(function () {
+        var msg = '@TempData["SuccessMessage"]';
+        if (msg) {
+            $('#successMessage').text(msg).fadeIn().delay(3000).fadeOut();
+        }
+    });
+</script>

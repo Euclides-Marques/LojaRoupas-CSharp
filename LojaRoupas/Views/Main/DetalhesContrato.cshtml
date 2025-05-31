@@ -1,0 +1,15 @@
+﻿@model Contratos
+
+@{
+    ViewData["Title"] = "::LOJA ROUPA";
+}
+
+<div class="container mt-5">
+    <h3>Detalhes do Contrato</h3>
+    <p><strong>Nome:</strong> @Model.Nome</p>
+    <p><strong>CPF:</strong> @Model.CPF</p>
+    <p><strong>Contrato:</strong> @Model.NumeroContrato</p>
+    <p><strong>Produto:</strong> @Model.Produto</p>
+    <p><strong>Valor:</strong> R$ @Model.Valor</p>
+    <p><strong>Vencimento:</strong> @Model.Vencimento.ToShortDateString()</p>
+</div>
