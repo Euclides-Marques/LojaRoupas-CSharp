@@ -44,7 +44,7 @@
     <h1 class="text-center">@ViewData["Title"]</h1>
     <br />
     <form asp-action="RedefinirSenha" method="post">
-        <input type="hidden" asp-for="Token" />
+        <input type="hidden" asp-for="Token" /> @*Ele te da um token que será hidden("invisível na tela")*@
 
         <!-- E-mail -->
         <div class="form-group">

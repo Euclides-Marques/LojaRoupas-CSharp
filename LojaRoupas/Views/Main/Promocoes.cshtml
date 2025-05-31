@@ -1,4 +1,5 @@
-﻿@model IEnumerable<LojaRoupas.Models.Roupa>
+﻿@*Aqui está definido o model(tabela) que ele vai usar para buscar os dados, e popular a tela*@
+@model IEnumerable<LojaRoupas.Models.Roupa>
 
 @{
     ViewData["Title"] = "::LOJA ROUPA";
@@ -10,6 +11,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
 </head>
 
+@*Aqui temos o style(estilo da pág) onde é configurada internamente no código, sem usar o css que está na pasta wwwroot*@
 <style>
     body {
         overflow-x: hidden;
@@ -77,10 +79,14 @@
     }
 </style>
 
+@*Aqui temos uma partial view que foi feita na pasta shared e reutilizada em diversas parte do código, sem ter que escrever todo o código novamente*@
 <div>
     <partial name="_LayoutSuperior" />
 </div>
 
+@*Aqui coloquei um carrossel para mostrar algumas coisas sobre a loga, onde tive que personalizar as imagens no figma
+    Além disso é onde irá aparecer todas as roupas que estão em promoções, quando  o admin cadastra-las
+*@
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>

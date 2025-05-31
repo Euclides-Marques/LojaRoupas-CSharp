@@ -15,6 +15,7 @@ namespace LojaRoupas.Services
             _roleManager = roleManager;
         }
 
+        //Aqui nessa parte ele verá se existe a role cliente ou admin, e caso não exista ele cria e salva no banco
         public void SeedRoles()
         {
             if (!_roleManager.RoleExistsAsync("Cliente").Result)
@@ -33,6 +34,7 @@ namespace LojaRoupas.Services
             }
         }
 
+        //Aqui nessa parte ele verá se existe o e-mail de adim, e caso não exista ele cria e salva no banco
         public void SeedUsers()
         {
             if (_userManager.FindByEmailAsync("admin@admin").Result == null)

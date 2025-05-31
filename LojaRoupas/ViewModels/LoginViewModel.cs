@@ -1,6 +1,7 @@
 ﻿using LojaRoupas.Models;
 using System.ComponentModel.DataAnnotations;
 
+//Nessa viewModel é o que será usado para quando for fazer o login
 namespace LojaRoupas.ViewModels
 {
     public class LoginViewModel

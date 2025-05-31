@@ -17,6 +17,8 @@ namespace LojaRoupas.Controllers
             _dbContext = dbContext;
         }
 
+        //Quando eu clicar em Minha Conta, ele fará uma requisição nesse método assíncrono,
+        //e vai trazer minhas informações caso eu tenha cadastro na tabela de cliente 
         public async Task<IActionResult> MeusDados()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -36,6 +38,7 @@ namespace LojaRoupas.Controllers
             return View(cliente);
         }
 
+        //Caso eu faça alguma atualização e salve, esses serão meus novos dados
         [HttpPost]
         public async Task<IActionResult> Salvar(Cliente model)
         {

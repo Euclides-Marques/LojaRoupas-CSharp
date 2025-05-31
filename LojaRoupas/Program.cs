@@ -10,11 +10,12 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Variável para armazenas a connection String
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
 
+//Configuração para o envio de e-mail(Só vai funcionar se estiver rodando o projeto localmente)
 builder.Services.Configure<EmailConfiguration>(builder.Configuration.GetSection("EmailConfiguration"));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();

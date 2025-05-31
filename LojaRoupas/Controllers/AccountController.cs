@@ -22,6 +22,8 @@ namespace LojaRoupas.Controllers
             _dbContext = dbContext;
         }
 
+        //Aqui eu fiz o método de login para a pessoa tentar entrar no sistema, e para isso será validado o Email e a Senha que estão no meu LoginViewModel,
+        //caso de certo, ele me retorna para a view Index.cshtml na pasta Main
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Login(string returnUrl)
@@ -56,7 +58,7 @@ namespace LojaRoupas.Controllers
             return RedirectToAction("Error", "Account");
         }
 
-
+        //Aqui eu entro na minha view de registro para cadastrar uma conta para o sistema
 
         [AllowAnonymous]
         [HttpGet]
@@ -65,6 +67,8 @@ namespace LojaRoupas.Controllers
             return View();
         }
 
+        //Aqui eu faço uma requisição e envio(POST) de informações para eu finalizar o meu cadastro e para isso as informações serão validadas e armazenasdas em
+        //variáveis e essas variáveis irão fazer o insert no banco de dados
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -114,6 +118,7 @@ namespace LojaRoupas.Controllers
             return View(registroVM);
         }
 
+        //Aqui eu faço uma requisição caso eu queira sair do sistema
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Logout()

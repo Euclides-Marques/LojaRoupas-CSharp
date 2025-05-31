@@ -10,6 +10,7 @@ namespace LojaRoupas.Services
         Task SendEmailAsync(string email, string assunto, string mensagemTexto, string mensagemHtml);
     }
 
+    //Aqui foi colocado as mesmas informações de e-mail que existe no appSettings, para caso ele não funcione o envio de e-mail por lá, irá funcionar por aqui
     public class EmailSender : IEmailSender
     {
         private readonly string NomeRemetente = "Estilo de Torcedor";

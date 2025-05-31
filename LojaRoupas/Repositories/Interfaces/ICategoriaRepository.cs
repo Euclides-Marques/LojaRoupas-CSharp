@@ -2,6 +2,7 @@
 
 namespace LojaRoupas.Repositories.Interfaces
 {
+    //Aqui eu criei interfaces que podem ser chamadas no controller e aqui liga para os repositories que é de onde será herdado as informações
     public interface ICategoriaRepository
     {
         IEnumerable<Categoria> Categorias { get; }

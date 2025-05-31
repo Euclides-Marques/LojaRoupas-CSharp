@@ -1,5 +1,6 @@
 ﻿namespace LojaRoupas.Entities
 {
+    //Aqui é onde eu criei minha classe que está sendo a minha entidade de configuração do e-mail
     public class EmailConfiguration
     {
         public string NomeRemetente { get; set; }

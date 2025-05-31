@@ -101,6 +101,9 @@
     }
 </style>
 
+@*Aqui é onde é feito o login do usuário para ele poder entrar no sistema e fazer a sua compra,
+    além disso cada campo é verificado e feito uma requisição no back-end e mostrada no fron-end
+*@
 <div class="container">
     <form id="loginForm" asp-controller="Account" asp-action="Login" method="post">
         <div asp-validation-summary="All" class="text-danger"></div>

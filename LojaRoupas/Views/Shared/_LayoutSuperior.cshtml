@@ -1,5 +1,6 @@
 ﻿@inject LojaRoupas.Context.AppDbContext _context
 
+@*Variáveis padrão*@
 @{
     var categorias = _context.Categorias.Where(c => c.Ativo == true).ToList();
 
@@ -166,6 +167,10 @@
     }
 </style>
 
+@*Menu Superior, onde vai ter o acesso do administrador e caso ele tenha a Role(papel) de Adin, ele poderá acessar essa área
+    Também terá a parte para acessar a conta que foi cadastrada, mas como o admin não é um cliente, dará erro ao clicar no link
+    Tamém terá a parte que tem o botão de sair do sistema
+*@
 <nav class="navbar fixed-top navbar-dark bg-dark">
     <div class="ms-auto d-flex align-items-center gap-3">
         @if (User.IsInRole("Admin"))
@@ -192,6 +197,9 @@
     </div>
 </nav>
 
+@*Aqui é a parte que tem o menu central, onde tem a logo da empresa, a barra de pesquisar os produtos, e 
+    onde poderá favoritar ou acessar o carrinho
+*@
 <div id="itemsContainer" class="container flex-wrap d-none d-md-flex align-items-center justify-content-between">
     <img class="img-responsive" src="~/images/logoPreta.png" id="logoPreta" />
     <form method="get" class="input-group rounded">
@@ -210,6 +218,7 @@
     </div>
 </div>
 
+@*Aqui é onde será o menu que tem os links para outras partes do sistema de vendas de roupa*@
 <nav id="menu" class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">

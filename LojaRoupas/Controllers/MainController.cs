@@ -41,6 +41,7 @@ namespace LojaRoupas.Controllers
             return View(model);
         }
 
+        //Aqui eu estou usando uma rota para falar qual será ela e o ID do produto que eu vou poder ver o detalhe
         [HttpGet("Detalhes/{id:guid}")]
         public async Task<IActionResult> Detalhes(Guid id)
         {
@@ -59,6 +60,7 @@ namespace LojaRoupas.Controllers
             return View(roupa);
         }
 
+        //Aqui eu estou usando uma rota para falar qual será ela e o ID do produto que eu vou poder ver a categoria
         [HttpGet("Categoria/{categoriaId:guid}")]
         public IActionResult GetRoupasByCategoria(Guid categoriaId)
         {
@@ -70,6 +72,7 @@ namespace LojaRoupas.Controllers
             return RedirectToAction("Index", new { categoriaId });
         }
 
+        //Aqui eu estou usando uma rota para falar qual será ela e o ID do produto que eu vou poder ver a marca
         [HttpGet("Marca/{marcaId:guid}")]
         public IActionResult GetRoupasByMarca(Guid marcaId)
         {
@@ -101,6 +104,7 @@ namespace LojaRoupas.Controllers
             return RedirectToAction("Favoritos");
         }
 
+        //Aqui eu estou usando uma rota para falar qual será ela e o ID do produto que eu vou poder ver os favoritos
         [HttpGet]
         public IActionResult Favoritos()
         {
@@ -127,6 +131,7 @@ namespace LojaRoupas.Controllers
             return RedirectToAction("Carrinho");
         }
 
+        //Aqui eu estou usando uma rota para falar qual será ela e o ID do produto que eu vou poder ver o carrinho
         [HttpGet]
         public IActionResult Carrinho()
         {
@@ -148,6 +153,7 @@ namespace LojaRoupas.Controllers
             return View();
         }
 
+        //Aqui eu estou usando uma rota para falar qual será ela e o ID do produto que eu vou poder ver os lançamentos
         [HttpGet]
         public IActionResult Lancamentos()
         {
@@ -164,6 +170,7 @@ namespace LojaRoupas.Controllers
             return View(roupasLanc);
         }
 
+        //Aqui eu estou usando uma rota para falar qual será ela e o ID do produto que eu vou poder ver os pedidos finalizados
         [HttpGet]
         public IActionResult PedidoFinalizado()
         {

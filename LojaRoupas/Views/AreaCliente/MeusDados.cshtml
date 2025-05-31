@@ -46,6 +46,9 @@
     <partial name="_LayoutSuperior" />
 </div>
 
+@*Nessa tela eu coloquei toda a informação do cliente quando ele faz o login, e os seus dados, 
+    ele poderá atualizar ou somente verificar o que preencheu em cada campo
+*@
 <div id="container">
     <span id="texto">DADOS</span>
     <hr />
@@ -124,7 +127,10 @@
     </div>
 </div>
 
-
+@*Aqui no JavaScript coloquei para ele puxar todos os estados do Brasil
+    Para ele fazer uma verificação e quando colcoar o CEP, ele preenche o restante sozinho
+    E uma máscara para formatar o CPF, CEP, Celular
+*@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Preenchendo o select de estados

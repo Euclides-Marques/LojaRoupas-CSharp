@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LojaRoupas.Context
 {
+    //Aqui é onde eu faço a minha configuração dos models que eu criei para eu começar a usá-los
     public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
