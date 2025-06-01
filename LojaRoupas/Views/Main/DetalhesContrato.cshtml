@@ -8,13 +8,78 @@
     <partial name="_LayoutSuperior" />
 </div>
 
+<style>
+    .container-detalhes-contrato {
+        margin-top: 140px;
+    }
+
+    .contract-card {
+        background: #ffffff;
+        border-radius: 1rem;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border: 1px solid #e0e0e0;
+    }
+
+        .contract-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        }
+
+    .contract-header {
+        background: linear-gradient(to right, #4e54c8, #8f94fb);
+        color: white;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        padding: 1.5rem;
+    }
+
+    .contract-body {
+        padding: 2rem;
+        font-size: 1.1rem;
+    }
+
+        .contract-body p {
+            margin-bottom: 1rem;
+        }
+
+    .label {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .value {
+        color: #555;
+    }
+
+        .value.valor {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .value.vencimento {
+            color: #dc3545;
+            font-weight: 500;
+        }
+</style>
+
 @*Aqui eu vejo a view onde trás o detalhe do contrato completo*@
-<div class="container mt-5">
-    <h3>Detalhes do Contrato</h3>
-    <p><strong>Nome:</strong> @Model.Nome</p>
-    <p><strong>CPF:</strong> @Model.CPF</p>
-    <p><strong>Contrato:</strong> @Model.NumeroContrato</p>
-    <p><strong>Produto:</strong> @Model.Produto</p>
-    <p><strong>Valor:</strong> R$ @Model.Valor</p>
-    <p><strong>Vencimento:</strong> @Model.Vencimento.ToShortDateString()</p>
+<div class="container-detalhes-contrato">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            <div class="contract-card">
+                <div class="contract-header">
+                    <h4 class="mb-0">📄 Detalhes do Contrato</h4>
+                </div>
+                <div class="contract-body">
+                    <p><span class="label">👤 Nome:</span> <span class="value">@Model.Nome</span></p>
+                    <p><span class="label">🆔 CPF:</span> <span class="value">@Model.CPF</span></p>
+                    <p><span class="label">📑 Contrato:</span> <span class="value">@Model.NumeroContrato</span></p>
+                    <p><span class="label">📦 Produto:</span> <span class="value">@Model.Produto</span></p>
+                    <p><span class="label">💰 Valor:</span> <span class="value valor">R$ @Model.Valor</span></p>
+                    <p><span class="label">⏰ Vencimento:</span> <span class="value vencimento">@Model.Vencimento.ToShortDateString()</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
