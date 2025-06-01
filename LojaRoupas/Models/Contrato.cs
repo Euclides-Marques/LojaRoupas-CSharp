@@ -1,5 +1,6 @@
 ﻿namespace LojaRoupas.Models
 {
+    //Aqui temos o model de contratos que pode ser ajustado de acordo com a necessidade do cliente ou do .csv que ele nos enviar
     public class Contratos
     {
         public Guid Id { get; set; }
