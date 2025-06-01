@@ -6,10 +6,75 @@
     <partial name="_LayoutSuperior" />
 </div>
 
+<style>
+    .container-resumo-contrato {
+        margin-top: 200px;
+    }
+
+    .resumo-card {
+        background: #ffffff;
+        border-radius: 1rem;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border: 1px solid #e0e0e0;
+    }
+
+        .resumo-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        }
+
+    .resumo-header {
+        background: linear-gradient(to right, #00b09b, #96c93d);
+        color: white;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        padding: 1.5rem;
+    }
+
+    .resumo-body {
+        padding: 2rem;
+        font-size: 1.1rem;
+    }
+
+        .resumo-body p {
+            margin-bottom: 1rem;
+        }
+
+    .label {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .value {
+        color: #555;
+    }
+
+        .value.total {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .value.atraso {
+            color: #dc3545;
+            font-weight: 600;
+        }
+</style>
+
 @*Aqui eu vejo a view onde trás o resumo dos contratos do cliente(Valor total de contratos e Maior atraso em dias)*@
-<div class="container mt-5">
-    <h3>Resumo de Contratos do Cliente</h3>
-    <p><strong>Cliente:</strong> @ViewBag.Cliente</p>
-    <p><strong>Total em Contratos:</strong> R$ @ViewBag.Total</p>
-    <p><strong>Maior Atraso:</strong> @ViewBag.MaiorAtraso dias</p>
+<div class="container-resumo-contrato">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            <div class="resumo-card">
+                <div class="resumo-header">
+                    <h4 class="mb-0">📊 Resumo de Contratos do Cliente</h4>
+                </div>
+                <div class="resumo-body">
+                    <p><span class="label">👤 Cliente:</span> <span class="value">@ViewBag.Cliente</span></p>
+                    <p><span class="label">💰 Total em Contratos:</span> <span class="value total">R$ @ViewBag.Total</span></p>
+                    <p><span class="label">⏱️ Maior Atraso:</span> <span class="value atraso">@ViewBag.MaiorAtraso dias</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
